@@ -1,17 +1,17 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Andrew Dickerson
 
-### date x
+### 5/22/24
 
-info
+Added setup. Began constructors for Map/Room/Tile(s)
 
 ### date y
 
 info
 
 
-## GROUP MEMBER 2
+## Benjamin Lim
 
 ### date x
 
