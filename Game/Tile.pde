@@ -10,7 +10,7 @@ public class Tile {
   }
   
   public void drawTile(int xcor, int ycor){
-    rect(xcor, ycor, 10, 10);
+    rect(xcor, ycor, 100, 100);
   }
 
 }

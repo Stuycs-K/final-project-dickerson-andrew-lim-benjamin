@@ -10,15 +10,23 @@ public class Room {
   }
   
   public Room(int[][] roomLayout) {
-    Room aRoom = new Room();
+    this();
     for(int r = 0; r<roomLayout.length; r++){
       for(int c = 0; c<roomLayout[0].length; c++){
         if(roomLayout[r][c] == 0){
-          aRoom[r][c] = new Floor(); 
+          room[r][c] = new Floor(); 
         }
         if(roomLayout[r][c] == 1){
-          aRoom[r][c] = new Wall(); 
+          room[r][c] = new Wall(); 
         }
+      }
+    }
+  }
+  
+  public void drawRoom(){
+    for(int r = 0; r<room.length; r++){
+      for(int c = 0; c<room[0].length; c++){
+         room[r][c].drawTile(c*100, r*100);
       }
     }
   }
