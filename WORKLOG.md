@@ -13,9 +13,9 @@ info
 
 ## Benjamin Lim
 
-### date x
+### 5/22/24
 
-info
+Created structure for Adventurer abstract class + Player and Enemy classes extending it
 
 ### date y
 
