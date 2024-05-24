@@ -39,9 +39,11 @@ void draw(){
   for(int i = 0; i < eList; i++){
     (entityList.get(i)).run();
   }
-  int bsize = bulletList.size();
-  for(int i = 0; i < bsize; i++) {
-    bulletList.get(i).run();
+  for(int i = 0; i < bulletList.size(); i++) {
+    //println(bulletList.get(i).lifespan);
+    if (bulletList.get(i).run()) {
+      i--;
+    }
   }
 }
 void mouseClicked() {

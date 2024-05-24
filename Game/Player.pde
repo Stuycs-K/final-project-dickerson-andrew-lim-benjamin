@@ -11,9 +11,7 @@ public class Player extends Adventurer {
   }
   
   void shoot() {
-    if(mousePressed == true){
-      //shoot towards mouse coords
-    }
+    bulletList.add(new Bullet(getX(), getY()));
   }
   void dodge() {
     

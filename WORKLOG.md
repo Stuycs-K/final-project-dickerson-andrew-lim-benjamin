@@ -25,6 +25,10 @@ Created structure for Adventurer abstract class + Player and Enemy classes exten
 
 Worked on shooting Bullet logic using angle, current issue of color registering as int when calling Bullet constructor with a color. 
 
+### 5/24/24
+
+Resolved color issue by using this keyword. Changed bullet, working on collision and lifespan effect on bullet. Need correct angle and triggers for bullet too.
+
 ### date y
 
 info
