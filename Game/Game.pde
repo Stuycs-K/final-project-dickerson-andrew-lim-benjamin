@@ -1,5 +1,6 @@
 int leversPressed = 0;
 String dead;
+ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 Map gameMap;
 Player p1;
 
@@ -26,9 +27,13 @@ void setup(){
     }
   }
 
-  p1 = new Player(20, "eggie");
+  p1 = new Player(20, 10, "eggie");
+  entityList.add(p1);
 }
 
 void draw(){
   gameMap.drawMap();
+  for(int i = 0; i < entityList.size(); i++){
+    (entityList.get(i)).run();
+  }
 }
