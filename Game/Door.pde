@@ -1,4 +1,5 @@
 public class Door extends Tile {
+  private String type = "Door";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;

@@ -1,4 +1,5 @@
 public class Water extends Tile {
+  private String type = "Water";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;

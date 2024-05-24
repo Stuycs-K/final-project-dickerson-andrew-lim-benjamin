@@ -1,4 +1,5 @@
 public class Wall extends Tile {
+  private String type = "Wall";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;

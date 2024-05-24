@@ -39,7 +39,14 @@ public class Player extends Adventurer {
     int newTileY = (int)(newPos.y/TILE_SIZE);
     if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
       Tile newTile = currentRoom.room[newTileY][newTileX]; 
-      if(!newTile.getCollision()){
+      if(newTile.isOfType("Door")){
+        if(newTileX == 0 || newTileX == currentRoom.room[0].length-1){
+          this.setPosition(width-this.getX(), this.getY());
+        }
+        if(newTileY == 0 || newTileY == currentRoom.room.length-1){
+          this.setPosition(this.getX(), height-this.getY());
+        }
+      }else if(!newTile.getCollision()){
         this.setPosition(newPos);
       }
     }

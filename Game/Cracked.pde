@@ -1,4 +1,5 @@
 public class Cracked extends Tile {
+  private String type = "Cracked";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;

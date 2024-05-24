@@ -1,4 +1,5 @@
 public class Lever extends Tile {
+  private String type = "Lever";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;

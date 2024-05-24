@@ -1,4 +1,5 @@
 public class Tile {
+  private String type = "";
   private boolean collision;
   private boolean breakable;
   private boolean permeable;
@@ -31,6 +32,15 @@ public class Tile {
   void setY(int val) {
     this.position = new PVector(this.getX(), val);
   }
+  String getType(){
+    return type;
+  }
+  boolean isOfType(String t){
+    return (this.getType()).equals(t);
+  }
+  boolean getCollision(){
+    return collision;
+  }
   
   public void drawTile(int xcor, int ycor){
     rect(xcor, ycor, 100, 100);
@@ -43,19 +53,8 @@ public class Tile {
     rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
   }
   
-  //private int distance(Tile t, Adventurer e){
-  //  return(int)(e.getPosition()).dist(t.getPosition());
-  //}
-  
-  boolean getCollision(){
-    return collision;
-  }
-  
   public void run(){
-    //int eList = entityList.size();
-    //for(int i = 0; i < eList; i++){
-    //  collide(entityList.get(i));
-    //}
+
   }
   
   
