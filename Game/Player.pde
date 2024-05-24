@@ -33,8 +33,17 @@ public class Player extends Adventurer {
     }
     walk.normalize();
     walk.mult(this.getSpeed());
-    this.addPosition(walk);
-    //drawPlayer(); interestingly this extra call makes a blur effect. Could be useful for drawBullet() ?
+    
+    PVector newPos = PVector.add(this.getPosition(), walk);
+    int newTileX = (int)(newPos.x/TILE_SIZE);
+    int newTileY = (int)(newPos.y/TILE_SIZE);
+    if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
+      Tile newTile = currentRoom.room[newTileY][newTileX]; 
+      if(!newTile.getCollision()){
+        this.setPosition(newPos);
+      }
+    }
+
   }
   
   void run() {

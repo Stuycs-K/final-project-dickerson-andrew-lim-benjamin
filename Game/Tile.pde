@@ -4,10 +4,10 @@ public class Tile {
   private boolean permeable;
   private PVector position;
 
-  public Tile(boolean coll, boolean breack, boolean perm){
-    collision = coll;
-    breakable = breack;
-    permeable = perm;
+  public Tile(boolean collision, boolean breakable, boolean permeable){
+    this.collision = collision;
+    this.breakable = breakable;
+    this.permeable = permeable;
   }
   
   PVector getPosition() {
@@ -40,24 +40,22 @@ public class Tile {
     if(!stroke){
       noStroke();
     }
-    rect(xcor, ycor, 100, 100);
+    rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
   }
   
-  private int distance(Tile t, Adventurer e){
-    return(int)(e.getPosition()).dist(t.getPosition());
-  }
+  //private int distance(Tile t, Adventurer e){
+  //  return(int)(e.getPosition()).dist(t.getPosition());
+  //}
   
-  void collide(Adventurer e){
-    if(collision && distance(this, e) <= 5){
-      setPosition(0-e.getX(), 0-e.getY());
-    }
+  boolean getCollision(){
+    return collision;
   }
   
   public void run(){
-    int eList = entityList.size();
-    for(int i = 0; i < eList; i++){
-      collide(entityList.get(i));
-    }
+    //int eList = entityList.size();
+    //for(int i = 0; i < eList; i++){
+    //  collide(entityList.get(i));
+    //}
   }
   
   

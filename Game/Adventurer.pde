@@ -32,6 +32,9 @@ public abstract class Adventurer {
   void setPosition(int x, int y) {
     this.position = new PVector(x, y);
   }
+  void setPosition(PVector newPos) {
+    this.position = new PVector(newPos.x, newPos.y);
+  }
   void addPosition(PVector add) {
     (this.position).add(add);
   }

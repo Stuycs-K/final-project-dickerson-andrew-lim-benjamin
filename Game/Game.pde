@@ -2,6 +2,7 @@ int leversPressed = 0;
 String dead;
 ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+int TILE_SIZE = 100;
 Map gameMap;
 Player p1;
 
@@ -29,7 +30,7 @@ void setup(){
     }
   }
 
-  p1 = new Player(20, 10, "eggie");
+  p1 = new Player(3, 8, "eggie");
   entityList.add(p1);
 }
 
