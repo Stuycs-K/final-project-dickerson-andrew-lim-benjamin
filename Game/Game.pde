@@ -46,6 +46,7 @@ void draw(){
     }
   }
 }
+
 void mouseClicked() {
   p1.shoot();
   println(entityList);
