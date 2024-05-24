@@ -12,5 +12,12 @@ public class Tile {
   public void drawTile(int xcor, int ycor){
     rect(xcor, ycor, 100, 100);
   }
+  public void drawTile(int xcor, int ycor, color c, boolean stroke){
+    fill(c);
+    if(!stroke){
+      noStroke();
+    }
+    rect(xcor, ycor, 100, 100);
+  }
 
 }

@@ -1,14 +1,14 @@
-public class Floor extends Tile {
+public class Cracked extends Tile {
   private boolean collision;
   private boolean breakable;
   private boolean permeable;
 
-  public Floor(){
-    super(false, false, true);
+  public Cracked(){
+    super(true, true, false);
   }
   
   public void drawTile(int xcor, int ycor){
-    color c = color(244,188,116);
+    color c = color(189,127,79);
     super.drawTile(xcor, ycor, c, false);
   }
 
