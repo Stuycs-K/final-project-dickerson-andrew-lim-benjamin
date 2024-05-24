@@ -1,15 +1,19 @@
-public class Floor extends Tile {
+public class Door extends Tile {
   private boolean collision;
   private boolean breakable;
   private boolean permeable;
 
-  public Floor(){
-    super(false, false, true);
+  public Door(){
+    super(true, false, false);
   }
   
   public void drawTile(int xcor, int ycor){
-    color c = color(244,188,116);
+    color c = color(80, 44, 21);
     super.drawTile(xcor, ycor, c, false);
+  }
+  
+  public void changeRoom(){
+    
   }
 
 }
