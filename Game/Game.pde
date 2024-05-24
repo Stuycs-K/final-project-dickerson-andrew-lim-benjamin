@@ -34,10 +34,17 @@ void setup(){
 
 void draw(){
   gameMap.drawMap();
-  for(int i = 0; i < entityList.size(); i++){
+  int eList = entityList.size();
+  for(int i = 0; i < eList; i++){
     (entityList.get(i)).run();
+  }
+  int bsize = bulletList.size();
+  for(int i = 0; i < bsize; i++) {
+    bulletList.get(i).run();
   }
 }
 void mouseClicked() {
   p1.shoot();
+  println(entityList);
+  println(bulletList + " | ");
 }

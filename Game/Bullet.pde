@@ -1,7 +1,7 @@
 public class Bullet {
   private int damage;
-  private int lifespan;
-  private int size;
+  private float lifespan;
+  private float size;
   private color c;
   private PVector pos;
   private PVector velocity;
@@ -11,12 +11,12 @@ public class Bullet {
     //lifespan = 10;
     //size = 5;
     //c = color(252,26,82);
-    Bullet(1, 10, 5, color(252,26,82), x, y);
+    this(1, 10, 5, color(252,26,82), x, y);
   }
-  public Bullet(int dmg, int li, int s, color c, float x, float y){ // should only construct on mouse click
-    damage = li;
-    lifespan = s;
-    size = dmg;
+  public Bullet(int dmg, float li, float s, color c, float x, float y){ // should only construct on mouse click
+    damage = dmg;
+    lifespan = li;
+    size = s;
     this.c = c;
     pos = new PVector(x, y);
     if (mouseX - x >= 0) { // Q1 or Q4 for atan
@@ -32,15 +32,27 @@ public class Bullet {
       }
       velocity = PVector.fromAngle(angle); // unit vector
     }
+    pos.add(velocity.mult(size)); // get out of adventurer range
   }
   
-  public void drawBullet(int xcor, int ycor){
+  public void drawBullet(float xcor, float ycor){
     fill(c);
     noStroke();
     circle(xcor, ycor, size);
   }
   
   public void move() {
-    
+    pos.add(velocity);
+  }
+  public void run() {
+    move();
+  }
+  public void collide() {
+    for (Adventurer e : entityList) {
+      if (pos.dist(e.position) < size) {
+        e.setHP(e.hp - damage);
+        bulletList.remove(this);
+      }
+    }
   }
 }
