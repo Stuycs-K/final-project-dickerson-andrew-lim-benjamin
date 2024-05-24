@@ -21,25 +21,21 @@ public class Player extends Adventurer {
   
   void move() {
     PVector walk = new PVector(0, 0);
-    if(keyPressed == true){
-      switch(key){
-        case 'w':
-          walk.y = -1;
-          break;
-        case 'a':
-          walk.x = -1;
-          break;
-        case 's':
-          walk.y = 1;
-          break;
-        case 'd':
-          walk.x = 1;
-          break;
-      }
-      walk.normalize();
-      walk.mult(this.getSpeed());
-      this.addPosition(walk);
+    if (keyboardInput.P1_UP) {
+      walk.y = -1;
     }
+    if (keyboardInput.P1_DOWN) {
+      walk.y = 1;
+    }
+    if (keyboardInput.P1_LEFT) {
+      walk.x = -1;
+    }
+    if (keyboardInput.P1_RIGHT) {
+      walk.x = 1;
+    }
+    walk.normalize();
+    walk.mult(this.getSpeed());
+    this.addPosition(walk);
     //drawPlayer(); interestingly this extra call makes a blur effect. Could be useful for drawBullet() ?
   }
   
