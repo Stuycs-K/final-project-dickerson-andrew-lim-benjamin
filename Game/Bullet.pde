@@ -11,7 +11,7 @@ public class Bullet {
     //lifespan = 10;
     //size = 5;
     //c = color(252,26,82);
-    Bullet(1, 10, 5, color(252,26,82), x, y);
+    this(1, 10, 5, color(252,26,82), x, y);
   }
   public Bullet(int dmg, int li, int s, color c, float x, float y){ // should only construct on mouse click
     damage = li;

@@ -7,6 +7,7 @@ Player p1;
 
 void setup(){
   size(1500,1000);
+  keyboardInput = new KeyboardBuffer();
   int[][] testerRoomLayout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
