@@ -44,6 +44,7 @@ void draw(){
     bulletList.get(i).run();
   }
 }
+
 void mouseClicked() {
   p1.shoot();
   println(entityList);
