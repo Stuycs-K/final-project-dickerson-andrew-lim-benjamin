@@ -15,6 +15,9 @@
 
 ### 5/24/24
 
+ - Reworked player movement to use KeyboardBuffer class.
+ - Began development on tile collision.
+
 ## Benjamin Lim
 
 ### 5/22/24
