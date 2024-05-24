@@ -21,6 +21,10 @@
 
 Created structure for Adventurer abstract class + Player and Enemy classes extending it
 
+### 5/23/24
+
+Worked on shooting Bullet logic using angle, current issue of color registering as int when calling Bullet constructor with a color. 
+
 ### date y
 
 info

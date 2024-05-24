@@ -1,6 +1,7 @@
 int leversPressed = 0;
 String dead;
 ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
+ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 Map gameMap;
 Player p1;
 
@@ -36,4 +37,7 @@ void draw(){
   for(int i = 0; i < entityList.size(); i++){
     (entityList.get(i)).run();
   }
+}
+void mouseClicked() {
+  p1.shoot();
 }
