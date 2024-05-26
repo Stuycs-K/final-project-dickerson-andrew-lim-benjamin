@@ -35,3 +35,4 @@ Resolved color issue by using this keyword. Changed bullet, working on collision
 ### 5/26/24
 
 Added radius field to adventurers for bullet collision detection
+Got direction and hitboxes working for bullets

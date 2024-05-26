@@ -9,7 +9,7 @@ public class Bullet {
   public Bullet(float x, float y, float startmove){ // must call with location
     //damage = 1;
     //lifespan = 5;
-    //size = 10;
+    //size = 15;
     //c = color(252,26,82);
     this(1, 5, 15, color(252,26,82), x, y, startmove);
     // seems 10 or less size bullets have hitbox issues
