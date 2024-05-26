@@ -54,9 +54,9 @@ public class Player extends Adventurer {
   }
   
   void run() {
-    drawPlayer();
     //shoot();
     move();
+    drawPlayer();
   }
   
   public Player(int hp, int speed, String name, int radius) {
@@ -68,7 +68,7 @@ public class Player extends Adventurer {
   
   public void drawPlayer(){
     fill(255);
-    circle(this.getX(), this.getY(), 50);
+    circle(this.getX(), this.getY(), getRadius());
   }
   
 }
