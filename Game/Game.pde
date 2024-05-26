@@ -31,7 +31,7 @@ void setup(){
     }
   }
 
-  p1 = new Player(3, 8, "eggie");
+  p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
 }
 

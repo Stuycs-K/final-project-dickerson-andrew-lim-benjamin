@@ -1,7 +1,7 @@
 public class Enemy extends Adventurer {
   private int shootCooldown;
-  public Enemy (int hp, int speed, String name) {
-    super(hp, speed, name);
+  public Enemy (int hp, int speed, String name, float radius) {
+    super(hp, speed, name, radius);
     shootCooldown = 0;
   }
   void shoot() {

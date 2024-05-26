@@ -11,7 +11,7 @@ public class Player extends Adventurer {
   }
   
   void shoot() {
-    bulletList.add(new Bullet(getX(), getY()));
+    bulletList.add(new Bullet(getX(), getY(), getRadius()*1.1));
   }
   void dodge() {
     
@@ -59,8 +59,8 @@ public class Player extends Adventurer {
     move();
   }
   
-  public Player(int hp, int speed, String name) {
-    super(hp, speed, name);
+  public Player(int hp, int speed, String name, int radius) {
+    super(hp, speed, name, radius);
     isDodging = false;
     currentRoom = gameMap.getRoom(1,1);
     this.setPosition(width/2, height/2);

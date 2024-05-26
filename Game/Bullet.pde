@@ -6,33 +6,34 @@ public class Bullet {
   private PVector pos;
   private PVector velocity;
 
-  public Bullet(float x, float y){ // must call with location
+  public Bullet(float x, float y, float startmove){ // must call with location
     //damage = 1;
     //lifespan = 5;
     //size = 5;
     //c = color(252,26,82);
-    this(1, 5, 10, color(252,26,82), x, y);
+    this(1, 5, 10, color(252,26,82), x, y, startmove);
   }
-  public Bullet(int dmg, float li, float s, color c, float x, float y){ // should only construct on mouse click
+  public Bullet(int dmg, float li, float s, color c, float x, float y, float startmove){ // should only construct on mouse click
     damage = dmg;
     lifespan = li;
     size = s;
     this.c = c;
     pos = new PVector(x, y);
-    if (mouseX - x >= 0) { // Q1 or Q4 for atan
-      velocity = PVector.fromAngle(atan2(mouseY, mouseX)); // unit vector
-    }
-    else {
-      float angle = Math.abs((float) mouseY / mouseX); // ref
-      if (mouseY - y >= 0) { //Q2
-        angle = 2*PI-angle; 
-      }
-      else { //Q3
-        angle = 2*PI+angle;
-      }
-      velocity = PVector.fromAngle(angle); // unit vector
-    }
-    //pos.add(velocity.mult(size)); // get out of adventurer range
+    //if (mouseX - x >= 0) { // Q1 or Q4 for atan
+      //println(-mouseY + " " + mouseX);
+      velocity = PVector.fromAngle(atan2(mouseY-y, mouseX-x)); // unit vector
+    //}
+    //else {
+    //  float angle = Math.abs((float) mouseY / mouseX); // ref
+    //  if (mouseY - y >= 0) { //Q3
+    //    angle = 2*PI-angle; 
+    //  }
+    //  else { //Q2
+    //    angle = 2*PI+angle;
+    //  }
+    //  velocity = PVector.fromAngle(angle); // unit vector
+    //}
+    pos.add(PVector.mult(velocity, startmove)); // get out of adventurer range
   }
   
   public void drawBullet(float xcor, float ycor){
