@@ -32,6 +32,6 @@ Worked on shooting Bullet logic using angle, current issue of color registering 
 
 Resolved color issue by using this keyword. Changed bullet, working on collision and lifespan effect on bullet. Need correct angle and triggers for bullet too.
 
-### date y
+### 5/26/24
 
-info
+Added radius field to adventurers for bullet collision detection

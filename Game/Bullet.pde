@@ -48,7 +48,8 @@ public class Bullet {
     //lifespan--; // need life span to work
     move();
     drawBullet(pos.x, pos.y);
-    return collide();
+    return false;
+    //return collide();
   }
   public boolean collide() {
     for (Adventurer e : entityList) {

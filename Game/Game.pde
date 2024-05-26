@@ -7,6 +7,7 @@ Map gameMap;
 Player p1;
 
 void setup(){
+  surface.setResizable(true);
   size(1500,1000);
   keyboardInput = new KeyboardBuffer();
   int[][] testerRoomLayout = {

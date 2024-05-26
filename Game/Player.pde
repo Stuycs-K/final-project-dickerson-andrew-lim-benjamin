@@ -55,7 +55,7 @@ public class Player extends Adventurer {
   
   void run() {
     drawPlayer();
-    shoot();
+    //shoot();
     move();
   }
   
