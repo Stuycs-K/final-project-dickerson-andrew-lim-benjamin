@@ -1,14 +1,15 @@
 public class Tile {
-  private String type = "";
+  private String type;
   private boolean collision;
   private boolean breakable;
   private boolean permeable;
   private PVector position;
 
-  public Tile(boolean collision, boolean breakable, boolean permeable){
+  public Tile(boolean collision, boolean breakable, boolean permeable, String type){
     this.collision = collision;
     this.breakable = breakable;
     this.permeable = permeable;
+    this.type = type;
   }
   
   PVector getPosition() {
@@ -32,13 +33,13 @@ public class Tile {
   void setY(int val) {
     this.position = new PVector(this.getX(), val);
   }
-  String getType(){
+  public String getType(){
     return type;
   }
-  boolean isOfType(String t){
+  public boolean isOfType(String t){
     return (this.getType()).equals(t);
   }
-  boolean getCollision(){
+  public boolean getCollision(){
     return collision;
   }
   

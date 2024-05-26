@@ -16,7 +16,13 @@
 ### 5/24/24
 
  - Reworked player movement to use KeyboardBuffer class.
- - Began development on tile collision.
+ - Added tile collision to prevent player from moving into tiles where collision is true.
+
+### 5/26/24
+
+- Fixed getType() in Tile class and all subclasses. 
+- Fixed implementation of changeRoom() on entering door to work properly. 
+- Added very basic designs for all 9 rooms.
 
 ## Benjamin Lim
 

@@ -1,11 +1,11 @@
 public class Cracked extends Tile {
-  private String type = "Cracked";
+  private String type;
   private boolean collision;
   private boolean breakable;
   private boolean permeable;
 
   public Cracked(){
-    super(true, true, false);
+    super(true, true, false, "Cracked");
   }
   
   public void drawTile(int xcor, int ycor){

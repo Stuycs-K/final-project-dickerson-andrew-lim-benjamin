@@ -1,6 +1,8 @@
 public class Player extends Adventurer {
   private boolean isDodging;
   private Room currentRoom;
+  int currentRoomRow;
+  int currentRoomCol;
   
   Room getCurrentRoom() {
     return currentRoom;
@@ -38,19 +40,33 @@ public class Player extends Adventurer {
     int newTileX = (int)(newPos.x/TILE_SIZE);
     int newTileY = (int)(newPos.y/TILE_SIZE);
     if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
-      Tile newTile = currentRoom.room[newTileY][newTileX]; 
+      Tile newTile = currentRoom.room[newTileY][newTileX];
+      //print(newTile.getType());
+      //print("X: "+ newTileX + ", Y: " + newTileY + ", ");
       if(newTile.isOfType("Door")){
-        if(newTileX == 0 || newTileX == currentRoom.room[0].length-1){
-          this.setPosition(width-this.getX(), this.getY());
-        }
-        if(newTileY == 0 || newTileY == currentRoom.room.length-1){
-          this.setPosition(this.getX(), height-this.getY());
-        }
+        this.changeRoom(newTileX, newTileY);
       }else if(!newTile.getCollision()){
         this.setPosition(newPos);
       }
     }
-
+    
+  }
+  
+  void changeRoom(int newTileX, int newTileY){
+    if(newTileX == 0){
+      currentRoomCol--;
+      this.setPosition(width-this.getX(), this.getY());
+    }else if(newTileX == currentRoom.room[0].length-1){
+      currentRoomCol++;
+      this.setPosition(width-this.getX(), this.getY());
+    }else if(newTileY == 0){
+      currentRoomRow--;
+      this.setPosition(this.getX(), height-this.getY());
+    }else if(newTileY == currentRoom.room.length-1){
+      currentRoomRow++;
+      this.setPosition(this.getX(), height-this.getY());
+    }
+    currentRoom = gameMap.getRoom(currentRoomRow, currentRoomCol);
   }
   
   void run() {
@@ -63,6 +79,8 @@ public class Player extends Adventurer {
     super(hp, speed, name, radius);
     isDodging = false;
     currentRoom = gameMap.getRoom(1,1);
+    currentRoomRow = 1;
+    currentRoomCol = 1;
     this.setPosition(width/2, height/2);
   }
   
