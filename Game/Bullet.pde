@@ -1,53 +1,68 @@
 public class Bullet {
   private int damage;
+  private int speed;
+  private Room currentRoom;
   public float lifespan;
   private float size;
   private color c;
   private PVector pos;
   private PVector velocity;
+  private boolean ally;
 
-  public Bullet(float x, float y, float startmove){ // must call with location
-    //damage = 1;
-    //lifespan = 5;
-    //size = 15;
-    //c = color(252,26,82);
-    this(1, 5, 15, color(252,26,82), x, y, startmove);
+  public Bullet(float x, float y, boolean ally, Room currentRoom){ // must call with location
+    this(1, 5, 15, color(252,26,82), x, y, 5, ally, currentRoom);
     // seems 10 or less size bullets have hitbox issues
   }
-  public Bullet(int dmg, float li, float s, color c, float x, float y, float startmove){ // should only construct on mouse click
-    damage = dmg;
-    lifespan = li;
-    size = s;
+  public Bullet(int damage, float lifespan, float size, color c, float x, float y, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
+    this.damage = damage;
+    this.lifespan = lifespan;
+    this.size = size;
     this.c = c;
+    this.speed = speed;
+    this.ally = ally;
+    this.currentRoom = currentRoom;
+    
     pos = new PVector(x, y);
-    velocity = PVector.fromAngle(atan2(mouseY-y, mouseX-x)); // unit vector
-    pos.add(PVector.mult(velocity, startmove)); // get out of adventurer range
+    velocity = (PVector.fromAngle(atan2(mouseY-y, mouseX-x))).mult(speed); // unit vector
+    
   }
   
   public void drawBullet(float xcor, float ycor){
     fill(c);
     noStroke();
     circle(xcor, ycor, size);
-    //hitbox
-    //fill(255);
-    //circle(pos.x, pos.y, size);
   }
   
   public void move() {
-    pos.add(velocity);
+    PVector newPos = pos.add(velocity);
+    int newTileX = (int)(newPos.x/TILE_SIZE);
+    int newTileY = (int)(newPos.y/TILE_SIZE);
+    if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
+      Tile newTile = currentRoom.room[newTileY][newTileX];
+      if(newTile.getPermeability()){
+        this.pos = newPos;
+      }else{
+        bulletList.remove(this); 
+      }
+    }
   }
   public boolean run() { // return if collision
     //lifespan--; // need life span to work
+    move();
     if (collide()) {
       return true;
     }
-    move();
     drawBullet(pos.x, pos.y);
     return false;
   }
+  
+  boolean getAllyStatus() {
+    return ally;
+  }
+  
   public boolean collide() {
     for (Adventurer e : entityList) {
-      if (pos.dist(e.position) < Math.abs(e.getRadius()-size)) {
+      if (pos.dist(e.position) < Math.abs(e.getRadius()-size) && e.getAllyStatus() != this.getAllyStatus()) {
         e.setHP(e.hp - damage);
         bulletList.remove(this);
         return true;

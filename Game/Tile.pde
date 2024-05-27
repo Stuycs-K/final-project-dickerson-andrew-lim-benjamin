@@ -42,6 +42,9 @@ public class Tile {
   public boolean getCollision(){
     return collision;
   }
+  public boolean getPermeability(){
+    return permeable;
+  }
   
   public void drawTile(int xcor, int ycor){
     rect(xcor, ycor, 100, 100);
