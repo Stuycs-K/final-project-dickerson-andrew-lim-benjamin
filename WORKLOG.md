@@ -30,6 +30,9 @@
 - Reworked bullet class to only hit opposite 'team' adventurers. 
 - Added collision to bullets with tiles that are not permeable.
 - Added speed modifier to bullet class.
+- Implemented delay between shots. 
+- Player can now hold left click to fire continuously.
+- Added breaking of breakable tiles by shooting.
 
 ## Benjamin Lim
 
