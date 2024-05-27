@@ -45,6 +45,9 @@ public class Tile {
   public boolean getPermeability(){
     return permeable;
   }
+  public boolean getBreakability(){
+    return breakable;
+  }
   
   public void drawTile(int xcor, int ycor){
     rect(xcor, ycor, 100, 100);

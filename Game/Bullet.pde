@@ -24,7 +24,6 @@ public class Bullet {
     
     pos = new PVector(x, y);
     velocity = (PVector.fromAngle(atan2(mouseY-y, mouseX-x))).mult(speed); // unit vector
-    
   }
   
   public void drawBullet(float xcor, float ycor){
@@ -39,6 +38,9 @@ public class Bullet {
     int newTileY = (int)(newPos.y/TILE_SIZE);
     if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
       Tile newTile = currentRoom.room[newTileY][newTileX];
+      if(newTile.getBreakability()){
+        currentRoom.room[newTileY][newTileX] = new Floor();
+      }
       if(newTile.getPermeability()){
         this.pos = newPos;
       }else{

@@ -3,11 +3,12 @@ String dead;
 ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
+boolean mouseLeft = false;
 Map gameMap;
 Player p1;
 
 void setup(){
-  surface.setResizable(true);
+  surface.setResizable(false);
   size(1500,1000);
   keyboardInput = new KeyboardBuffer();
   int[][] room00Layout = {
@@ -163,10 +164,15 @@ void draw(){
       i--;
     }
   }
-}
-
-void mouseClicked() {
-  p1.shoot();
-  println(entityList);
-  println(bulletList + " | ");
+  
+  if(mousePressed && mouseButton == LEFT){
+    mouseLeft = true;
+  }else{
+    mouseLeft = false;
+  }
+  
+  if(mouseLeft && (frameCount - p1.getLastShotTime() >= p1.getShootDelay())){
+    p1.shoot();
+    p1.setLastShotTime(frameCount);
+  }
 }

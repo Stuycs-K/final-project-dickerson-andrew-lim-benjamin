@@ -5,12 +5,23 @@ public abstract class Adventurer {
   private float radius;
   private String name;
   private PVector position;
+  private int shootDelay = 15;
+  private int lastShotTime = 0;
   public Adventurer(boolean ally, int hp, int speed, String name, float radius) {
     this.ally = ally;
     this.hp = hp;
     this.speed = speed;
     this.name = name;
     this.radius = radius; // use for hitbox distance
+  }
+  int getShootDelay() {
+    return shootDelay;
+  }
+  int getLastShotTime() {
+    return lastShotTime;
+  }
+  void setLastShotTime(int lastShotTime){
+    this.lastShotTime = lastShotTime;
   }
   boolean getAllyStatus() {
     return ally;

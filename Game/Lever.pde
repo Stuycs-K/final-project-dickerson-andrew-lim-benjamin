@@ -30,7 +30,7 @@ public class Lever extends Tile {
     if(!isToggled()) {
       toggled = true;
       leversPressed++;
-      print(leversPressed);
+      //print(leversPressed);
     }
   }
 
