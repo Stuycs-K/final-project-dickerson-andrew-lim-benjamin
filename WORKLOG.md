@@ -25,6 +25,12 @@
 - Added very basic designs for all 9 rooms.
 - Added lever functionality.
 
+### 5/27/24
+
+- Reworked bullet class to only hit opposite 'team' adventurers. 
+- Added collision to bullets with tiles that are not permeable.
+- Added speed modifier to bullet class.
+
 ## Benjamin Lim
 
 ### 5/22/24
