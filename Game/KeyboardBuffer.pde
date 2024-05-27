@@ -18,6 +18,7 @@ class KeyboardBuffer {
   boolean P1_LEFT;
   boolean P1_RIGHT;
   boolean P1_SPACE;
+  boolean P1_INTERACT;
 
   public KeyboardBuffer() {
     P1_UP = false;
@@ -25,6 +26,7 @@ class KeyboardBuffer {
     P1_LEFT = false;
     P1_RIGHT = false;
     P1_SPACE = false;
+    P1_INTERACT = false;
   }
 
   //Map your keys here. You can bind any key presses to
@@ -46,6 +48,9 @@ class KeyboardBuffer {
     }
     if(code == ' '){
       P1_SPACE = pressed;
+    }
+    if(code == 'E'){
+      P1_INTERACT = pressed;
     }
     //special codes exist: https://processing.org/reference/keyCode.html
     

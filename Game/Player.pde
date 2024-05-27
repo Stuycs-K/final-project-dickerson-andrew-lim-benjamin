@@ -69,8 +69,23 @@ public class Player extends Adventurer {
     currentRoom = gameMap.getRoom(currentRoomRow, currentRoomCol);
   }
   
+  void interact() {
+    if(keyboardInput.P1_INTERACT){
+      for(int r = (this.getY()/TILE_SIZE)-1; r<(this.getY()/TILE_SIZE)+2; r++){
+        for(int c = (this.getX()/TILE_SIZE)-1; c<(this.getX()/TILE_SIZE)+2; c++){
+           Tile newTile = currentRoom.room[r][c];
+           if(newTile.isOfType("Lever")){
+             Lever l = (Lever)currentRoom.room[r][c];
+             l.toggleLever();
+           }
+        }
+      }
+    }
+  }
+  
   void run() {
     //shoot();
+    interact();
     move();
     drawPlayer();
   }
