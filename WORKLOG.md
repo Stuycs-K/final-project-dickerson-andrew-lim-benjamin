@@ -23,6 +23,7 @@
 - Fixed getType() in Tile class and all subclasses. 
 - Fixed implementation of changeRoom() on entering door to work properly. 
 - Added very basic designs for all 9 rooms.
+- Added lever functionality.
 
 ## Benjamin Lim
 
