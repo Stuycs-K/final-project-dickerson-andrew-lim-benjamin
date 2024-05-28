@@ -1,5 +1,6 @@
 public class Player extends Adventurer {
   private boolean isDodging;
+  private int dodgeCD;
   private Room currentRoom;
   int currentRoomRow;
   int currentRoomCol;
@@ -11,12 +12,19 @@ public class Player extends Adventurer {
   void setCurrentRoom(Room room) {
     currentRoom = room;
   }
-  
+  void setHP(int hp) {
+    if (!isDodging) { // no damage taken while dodging
+      super.setHP(hp);
+    }
+  }
   void shoot() {
     bulletList.add(new Bullet(getX(), getY(), this.getAllyStatus(), this.getCurrentRoom()));
   }
   void dodge() {
-    
+    //print("DODGE");
+    dodgeCD = 100;
+    setSpeed(getSpeed()*5);
+    isDodging = true;
   }
   
   void move() {
@@ -34,6 +42,13 @@ public class Player extends Adventurer {
       walk.x = 1;
     }
     walk.normalize();
+    if (dodgeCD <= 0 && keyboardInput.P1_SPACE) {
+      dodge();
+    }
+    if (dodgeCD == 95) {
+      setSpeed(getSpeed()/5);
+      isDodging = false;
+    }
     walk.mult(this.getSpeed());
     
     PVector newPos = PVector.add(this.getPosition(), walk);
@@ -84,6 +99,7 @@ public class Player extends Adventurer {
   }
   
   void run() {
+    dodgeCD--;
     //shoot();
     interact();
     move();
@@ -93,6 +109,7 @@ public class Player extends Adventurer {
   public Player(int hp, int speed, String name, int radius) {
     super(true, hp, speed, name, radius);
     isDodging = false;
+    dodgeCD = 0;
     currentRoom = gameMap.getRoom(1,1);
     currentRoomRow = 1;
     currentRoomCol = 1;
