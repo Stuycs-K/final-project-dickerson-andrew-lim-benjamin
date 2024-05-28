@@ -82,6 +82,9 @@ public class Player extends Adventurer {
       this.setPosition(this.getX(), height-this.getY());
     }
     currentRoom = gameMap.getRoom(currentRoomRow, currentRoomCol);
+    for (Bullet b : bulletList) {
+      b.setLifeSpan(0);
+    }
   }
   
   void interact() {

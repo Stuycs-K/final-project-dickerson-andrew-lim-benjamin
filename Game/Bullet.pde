@@ -76,4 +76,10 @@ public class Bullet {
     }
     return false;
   }
+  public float getLifeSpan() {
+    return lifespan;
+  }
+  public void setLifeSpan(float val) {
+    this.lifespan = val;
+  }
 }

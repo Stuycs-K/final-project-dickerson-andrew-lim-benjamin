@@ -57,3 +57,4 @@ Got direction and hitboxes working for bullets
 
 Working dodge and dodgeImmunity
 Working lifeSpan
+Delete bullets when swap room
