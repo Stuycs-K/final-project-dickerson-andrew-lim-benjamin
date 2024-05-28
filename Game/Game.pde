@@ -150,6 +150,11 @@ void setup(){
 
   p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
+  
+  for(int i = 0; i<3; i++){
+    spawnEnemy(p1.getCurrentRoom());    
+  }
+
 }
 
 void draw(){
@@ -175,4 +180,13 @@ void draw(){
     p1.shoot();
     p1.setLastShotTime(frameCount);
   }
+}
+
+void spawnEnemy(Room room){
+  int newTileX = 0;
+  int newTileY = 0;
+  int randX = (int)random(width-TILE_SIZE) + TILE_SIZE;
+  int randY = (int)random(height-TILE_SIZE) + TILE_SIZE;
+
+  entityList.add(new Enemy(10, 3, "Bob", 50, randX, randY));
 }

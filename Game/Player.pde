@@ -1,17 +1,6 @@
 public class Player extends Adventurer {
   private boolean isDodging;
-  private Room currentRoom;
-  int currentRoomRow;
-  int currentRoomCol;
-  
-  Room getCurrentRoom() {
-    return currentRoom;
-  }
-  
-  void setCurrentRoom(Room room) {
-    currentRoom = room;
-  }
-  
+
   void shoot() {
     bulletList.add(new Bullet(getX(), getY(), this.getAllyStatus(), this.getCurrentRoom()));
   }
@@ -39,8 +28,8 @@ public class Player extends Adventurer {
     PVector newPos = PVector.add(this.getPosition(), walk);
     int newTileX = (int)(newPos.x/TILE_SIZE);
     int newTileY = (int)(newPos.y/TILE_SIZE);
-    if(newTileX >= 0 && newTileX < currentRoom.room[0].length && newTileY >= 0 && newTileY < currentRoom.room.length){
-      Tile newTile = currentRoom.room[newTileY][newTileX];
+    if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
+      Tile newTile = getCurrentRoom().room[newTileY][newTileX];
       //print(newTile.getType());
       //print("X: "+ newTileX + ", Y: " + newTileY + ", ");
       if(newTile.isOfType("Door")){
@@ -56,26 +45,26 @@ public class Player extends Adventurer {
     if(newTileX == 0){
       currentRoomCol--;
       this.setPosition(width-this.getX(), this.getY());
-    }else if(newTileX == currentRoom.room[0].length-1){
+    }else if(newTileX == getCurrentRoom().room[0].length-1){
       currentRoomCol++;
       this.setPosition(width-this.getX(), this.getY());
     }else if(newTileY == 0){
       currentRoomRow--;
       this.setPosition(this.getX(), height-this.getY());
-    }else if(newTileY == currentRoom.room.length-1){
+    }else if(newTileY == getCurrentRoom().room.length-1){
       currentRoomRow++;
       this.setPosition(this.getX(), height-this.getY());
     }
-    currentRoom = gameMap.getRoom(currentRoomRow, currentRoomCol);
+    setCurrentRoom(gameMap.getRoom(currentRoomRow, currentRoomCol));
   }
   
   void interact() {
     if(keyboardInput.P1_INTERACT){
       for(int r = (this.getY()/TILE_SIZE)-1; r<(this.getY()/TILE_SIZE)+2; r++){
         for(int c = (this.getX()/TILE_SIZE)-1; c<(this.getX()/TILE_SIZE)+2; c++){
-           Tile newTile = currentRoom.room[r][c];
+           Tile newTile = getCurrentRoom().room[r][c];
            if(newTile.isOfType("Lever")){
-             Lever l = (Lever)currentRoom.room[r][c];
+             Lever l = (Lever)getCurrentRoom().room[r][c];
              l.toggleLever();
            }
         }
@@ -93,9 +82,9 @@ public class Player extends Adventurer {
   public Player(int hp, int speed, String name, int radius) {
     super(true, hp, speed, name, radius);
     isDodging = false;
-    currentRoom = gameMap.getRoom(1,1);
-    currentRoomRow = 1;
-    currentRoomCol = 1;
+    setCurrentRoom(gameMap.getRoom(1,1));
+    setCurrentRoomRow(1);
+    setCurrentRoomCol(1);
     this.setPosition(width/2, height/2);
   }
   

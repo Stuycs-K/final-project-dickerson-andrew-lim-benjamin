@@ -7,6 +7,30 @@ public abstract class Adventurer {
   private PVector position;
   private int shootDelay = 15;
   private int lastShotTime = 0;
+  private Room currentRoom;
+  int currentRoomRow;
+  int currentRoomCol;
+  
+  Room getCurrentRoom() {
+    return currentRoom;
+  }
+  void setCurrentRoom(Room room) {
+    currentRoom = room;
+  }
+  int getCurrentRoomRow() {
+    return currentRoomRow;
+  }
+  void setCurrentRoomRow(int currentRoomRow) {
+    this.currentRoomRow = currentRoomRow;
+  }
+  int getCurrentRoomCol() {
+    return currentRoomCol;
+  }
+  void setCurrentRoomCol(int currentRoomCol) {
+    this.currentRoomCol = currentRoomCol;
+  }
+  
+  
   public Adventurer(boolean ally, int hp, int speed, String name, float radius) {
     this.ally = ally;
     this.hp = hp;
