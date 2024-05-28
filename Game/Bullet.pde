@@ -10,7 +10,7 @@ public class Bullet {
   private boolean ally;
 
   public Bullet(float x, float y, boolean ally, Room currentRoom){ // must call with location
-    this(1, 5, 15, color(252,26,82), x, y, 5, ally, currentRoom);
+    this(1, 100, 15, color(252,26,82), x, y, 5, ally, currentRoom);
     // seems 10 or less size bullets have hitbox issues
   }
   public Bullet(int damage, float lifespan, float size, color c, float x, float y, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -49,9 +49,13 @@ public class Bullet {
     }
   }
   public boolean run() { // return if collision
-    //lifespan--; // need life span to work
+    lifespan--; // need life span to work
     move();
     if (collide()) {
+      return true;
+    }
+    if (lifespan <= 0) {
+      bulletList.remove(this);
       return true;
     }
     drawBullet(pos.x, pos.y);
