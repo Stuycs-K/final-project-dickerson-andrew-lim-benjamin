@@ -154,6 +154,7 @@ void setup(){
 
 void draw(){
   gameMap.drawMap();
+  // if player or boss dead then win("player"/"boss")
   int eList = entityList.size();
   for(int i = 0; i < eList; i++){
     (entityList.get(i)).run();
@@ -175,4 +176,8 @@ void draw(){
     p1.shoot();
     p1.setLastShotTime(frameCount);
   }
+}
+void win(String str) {
+  // display a win screen
+  // stop draw
 }
