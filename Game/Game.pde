@@ -151,7 +151,7 @@ void setup() {
   p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
 
-  for(int i = 0; i<3; i++) {
+  for(int i=0; i<3; i++) {
     spawnEnemy(p1.getCurrentRoomRow(), p1.getCurrentRoomCol(), randomEnemyCoords());
   }
 }
