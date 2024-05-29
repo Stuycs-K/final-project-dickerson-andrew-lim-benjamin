@@ -151,9 +151,17 @@ void setup() {
   p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
 
-  for(int i=0; i<3; i++) {
-    spawnEnemy(p1.getCurrentRoomRow(), p1.getCurrentRoomCol(), randomEnemyCoords());
+
+  for(int r = 0; r<gameMap.getRows(); r++){
+    for(int c = 0; c<gameMap.getCols(); c++){
+      int randEnemyCount = (int)random(3)+1;
+      //randEnemyCount = 3;
+      spawnEnemy(r, c, randEnemyCount);
+    }
   }
+  //for(int i=0; i<3; i++) {
+  //  spawnEnemy(p1.getCurrentRoomRow(), p1.getCurrentRoomCol(), randomEnemyCoords());
+  //}
 }
 
 void draw() {

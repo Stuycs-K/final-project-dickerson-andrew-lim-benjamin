@@ -1,7 +1,8 @@
 public class Enemy extends Adventurer {
-  int lastChangedDirection;
+  int lastTimeMoved;
   int moveDelay;
   int randMoveNum;
+  boolean hitCollideTile;
   
   public Enemy(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(true, hp, speed, name, radius);
@@ -9,8 +10,9 @@ public class Enemy extends Adventurer {
     setCurrentRoomRow(roomRow);
     setCurrentRoomCol(roomCol);
     this.setPosition(x, y);
-    lastChangedDirection = 0;
+    lastTimeMoved = 0;
     moveDelay = 30;
+    hitCollideTile = false;
   } 
   
   void shoot() {
@@ -18,11 +20,24 @@ public class Enemy extends Adventurer {
   }
   
   void move() {
-    if (frameCount - lastChangedDirection >= moveDelay) {
-      randMoveNum = (int) random(5);
+    if (frameCount - lastTimeMoved >= moveDelay) {
+      if(hitCollideTile){
+        //println("hit wall");
+        int newRand = randMoveNum;
+        while(newRand == randMoveNum){
+          newRand = (int) random(6);
+        }
+        moveDelay = 0;
+        randMoveNum = newRand;
+        hitCollideTile = false;
+      }else{
+        randMoveNum = (int) random(5);
+        //randMoveNum = 4;
+      }
       moveDelay = (int) random(30)+30;
-      lastChangedDirection = frameCount;
+      lastTimeMoved = frameCount;
     }else{
+      //println(randMoveNum);
       PVector walk = new PVector(0, 0);
       if (randMoveNum == 0) {
         walk.y = -1;
@@ -37,7 +52,10 @@ public class Enemy extends Adventurer {
         walk.x = 1;
       }
       if (randMoveNum == 4) {
-        walk.x = 1;
+        walk = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);
+      }
+      if (randMoveNum == 5) {
+        moveDelay/=2;
       }
       walk.normalize();
       walk.mult(this.getSpeed());
@@ -49,6 +67,8 @@ public class Enemy extends Adventurer {
         Tile newTile = getCurrentRoom().room[newTileY][newTileX];
         if(!newTile.getCollision()){
           this.setPosition(newPos);
+        }else{
+          hitCollideTile = true; 
         }
       }
     }
@@ -65,9 +85,16 @@ public class Enemy extends Adventurer {
   }
 }
 
+public void spawnEnemy(int roomRow, int roomCol, int count){
+  for(int i = 0; i<count; i++){
+    int[] eCoords = randomEnemyCoords();
+    spawnEnemy(roomRow, roomCol, eCoords); 
+  }
+}
+
 public void spawnEnemy(int roomRow, int roomCol){
   int[] eCoords = randomEnemyCoords();
-  entityList.add(new Enemy(10, 3, "Bob", 50, eCoords[0], eCoords[1], roomRow, roomCol));
+  spawnEnemy(roomRow, roomCol, eCoords);
 }
 
 public void spawnEnemy(int roomRow, int roomCol, int[]eCoords){
