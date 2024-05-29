@@ -99,7 +99,7 @@ public class Player extends Adventurer {
   }
  
   public Player(int hp, int speed, String name, int radius) {
-    super(true, hp, speed, name, radius);
+    super(true, hp, speed, name, radius, 15);
     isDodging = false;
     dodgeCD = 0;
     setCurrentRoom(gameMap.getRoom(1,1));

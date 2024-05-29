@@ -151,7 +151,7 @@ void setup() {
   p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
 
-
+  //COMMENT THIS OUT TO REMOVE ENEMY SPAWNING FOR TESTING PURPOSES:
   for(int r = 0; r<gameMap.getRows(); r++){
     for(int c = 0; c<gameMap.getCols(); c++){
       int randEnemyCount = (int)random(3)+1;
@@ -159,9 +159,7 @@ void setup() {
       spawnEnemy(r, c, randEnemyCount);
     }
   }
-  //for(int i=0; i<3; i++) {
-  //  spawnEnemy(p1.getCurrentRoomRow(), p1.getCurrentRoomCol(), randomEnemyCoords());
-  //}
+  //
 }
 
 void draw() {
@@ -170,7 +168,14 @@ void draw() {
   int eList = entityList.size();
   for (int i = 0; i < eList; i++) {
     if((entityList.get(i).getCurrentRoom()).equals(p1.getCurrentRoom())){
-      (entityList.get(i)).run();
+      if((entityList.get(i)).getHP() > 0){
+        (entityList.get(i)).run();
+      }
+      else{
+        entityList.remove(entityList.get(i));
+        i--;
+        eList--;
+      }
     }
   }
   for (int i = 0; i < bulletList.size(); i++) {

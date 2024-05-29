@@ -10,7 +10,7 @@ public class Bullet {
   private boolean ally;
 
   public Bullet(float startX, float startY, float endX, float endY, boolean ally, Room currentRoom){ // must call with location
-    this(1, 100, 15, color(252,26,82), startX, startY, endX, endY, 7, ally, currentRoom);
+    this(1, 100, 15, color(252,26,82), startX, startY, endX, endY, 8, ally, currentRoom);
     // seems 10 or less size bullets have hitbox issues
   }
   public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -23,7 +23,14 @@ public class Bullet {
     this.currentRoom = currentRoom;
     
     pos = new PVector(startX, startY);
-    velocity = (PVector.fromAngle(atan2(endY, endX))).mult(speed); // unit vector
+    
+    if(ally){
+      velocity = (PVector.fromAngle(atan2(endY, endX))).mult(speed); // unit vector
+    }else{
+      velocity = new PVector(endX - startX, endY - startY);
+      velocity.normalize();
+      velocity.mult(speed); 
+    }
   }
   
   public void drawBullet(float xcor, float ycor){

@@ -5,7 +5,7 @@ public abstract class Adventurer {
   private float radius;
   private String name;
   private PVector position;
-  private int shootDelay = 15;
+  private int shootDelay;
   private int lastShotTime = 0;
   private Room currentRoom;
   int currentRoomRow;
@@ -31,12 +31,13 @@ public abstract class Adventurer {
   }
   
   
-  public Adventurer(boolean ally, int hp, int speed, String name, float radius) {
+  public Adventurer(boolean ally, int hp, int speed, String name, float radius, int shootDelay) {
     this.ally = ally;
     this.hp = hp;
     this.speed = speed;
     this.name = name;
     this.radius = radius; // use for hitbox distance
+    this.shootDelay = shootDelay;
   }
   int getShootDelay() {
     return shootDelay;

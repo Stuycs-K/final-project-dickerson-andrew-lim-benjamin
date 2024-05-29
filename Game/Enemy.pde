@@ -5,7 +5,7 @@ public class Enemy extends Adventurer {
   boolean hitCollideTile;
   
   public Enemy(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
-    super(true, hp, speed, name, radius);
+    super(false, hp, speed, name, radius, 45);
     setCurrentRoom(gameMap.getRoom(roomRow, roomCol));
     setCurrentRoomRow(roomRow);
     setCurrentRoomCol(roomCol);
@@ -16,7 +16,10 @@ public class Enemy extends Adventurer {
   } 
   
   void shoot() {
-    
+    if (frameCount - getLastShotTime() >= getShootDelay()) {
+      bulletList.add(new Bullet(getX(), getY(), p1.getX(), p1.getY(), getAllyStatus(), getCurrentRoom()));
+      setLastShotTime(frameCount);
+    }
   }
   
   void move() {
@@ -80,8 +83,9 @@ public class Enemy extends Adventurer {
   }
   
   void run() {
+    shoot();
     move();
-    drawEnemy();
+    drawEnemy(); 
   }
 }
 
@@ -98,7 +102,7 @@ public void spawnEnemy(int roomRow, int roomCol){
 }
 
 public void spawnEnemy(int roomRow, int roomCol, int[]eCoords){
-  entityList.add(new Enemy(10, 3, "Bob", 50, eCoords[0], eCoords[1], roomRow, roomCol));
+  entityList.add(new Enemy(3, 3, "Bob", 50, eCoords[0], eCoords[1], roomRow, roomCol));
 }
 
 public int[] randomEnemyCoords(){
