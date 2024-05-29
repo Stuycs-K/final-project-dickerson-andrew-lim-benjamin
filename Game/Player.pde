@@ -1,11 +1,31 @@
 public class Player extends Adventurer {
   private boolean isDodging;
+  private int dodgeCD;
+  private Room currentRoom;
+  int currentRoomRow;
+  int currentRoomCol;
+  
+  Room getCurrentRoom() {
+    return currentRoom;
+  }
+  
+  void setCurrentRoom(Room room) {
+    currentRoom = room;
+  }
+  void setHP(int hp) {
+    if (!isDodging) { // no damage taken while dodging
+      super.setHP(hp);
+    }
+  }
 
   void shoot() {
     bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom()));
   }
   void dodge() {
-    
+    //print("DODGE");
+    dodgeCD = 100;
+    setSpeed(getSpeed()*5);
+    isDodging = true;
   }
   
   void move() {
@@ -23,6 +43,13 @@ public class Player extends Adventurer {
       walk.x = 1;
     }
     walk.normalize();
+    if (dodgeCD <= 0 && keyboardInput.P1_SPACE) {
+      dodge();
+    }
+    if (dodgeCD == 95) {
+      setSpeed(getSpeed()/5);
+      isDodging = false;
+    }
     walk.mult(this.getSpeed());
     
     PVector newPos = PVector.add(this.getPosition(), walk);
@@ -55,7 +82,10 @@ public class Player extends Adventurer {
       currentRoomRow++;
       this.setPosition(this.getX(), height-this.getY());
     }
-    setCurrentRoom(gameMap.getRoom(currentRoomRow, currentRoomCol));
+    currentRoom = gameMap.getRoom(currentRoomRow, currentRoomCol);
+    for (Bullet b : bulletList) {
+      b.setLifeSpan(0);
+    }
   }
   
   void interact() {
@@ -73,6 +103,7 @@ public class Player extends Adventurer {
   }
   
   void run() {
+    dodgeCD--;
     //shoot();
     interact();
     move();
@@ -82,9 +113,10 @@ public class Player extends Adventurer {
   public Player(int hp, int speed, String name, int radius) {
     super(true, hp, speed, name, radius);
     isDodging = false;
-    setCurrentRoom(gameMap.getRoom(1,1));
-    setCurrentRoomRow(1);
-    setCurrentRoomCol(1);
+    dodgeCD = 0;
+    currentRoom = gameMap.getRoom(1,1);
+    currentRoomRow = 1;
+    currentRoomCol = 1;
     this.setPosition(width/2, height/2);
   }
   

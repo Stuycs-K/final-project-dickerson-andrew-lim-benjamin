@@ -49,9 +49,13 @@ public class Bullet {
     }
   }
   public boolean run() { // return if collision
-    //lifespan--; // need life span to work
+    lifespan--; // need life span to work
     move();
     if (collide()) {
+      return true;
+    }
+    if (lifespan <= 0) {
+      bulletList.remove(this);
       return true;
     }
     drawBullet(pos.x, pos.y);
@@ -71,5 +75,11 @@ public class Bullet {
       }
     }
     return false;
+  }
+  public float getLifeSpan() {
+    return lifespan;
+  }
+  public void setLifeSpan(float val) {
+    this.lifespan = val;
   }
 }
