@@ -2,7 +2,7 @@ public class Player extends Adventurer {
   private boolean isDodging;
 
   void shoot() {
-    bulletList.add(new Bullet(getX(), getY(), this.getAllyStatus(), this.getCurrentRoom()));
+    bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom()));
   }
   void dodge() {
     

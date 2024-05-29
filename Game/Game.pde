@@ -7,9 +7,9 @@ boolean mouseLeft = false;
 Map gameMap;
 Player p1;
 
-void setup(){
+void setup() {
   surface.setResizable(false);
-  size(1500,1000);
+  size(1500, 1000);
   keyboardInput = new KeyboardBuffer();
   int[][] room00Layout = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -24,7 +24,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room00 = new Room(room00Layout);
-  
+
   int[][] room01Layout = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -38,7 +38,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room01 = new Room(room01Layout);
-  
+
   int[][] room02Layout = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -52,7 +52,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room02 = new Room(room02Layout);
-  
+
   int[][] room10Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -66,7 +66,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room10 = new Room(room10Layout);
-  
+
   int[][] room11Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -80,7 +80,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room11 = new Room(room11Layout);
-  
+
   int[][] room12Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -94,7 +94,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room12 = new Room(room12Layout);
-  
+
   int[][] room20Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -108,7 +108,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room20 = new Room(room20Layout);
-  
+
   int[][] room21Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -122,7 +122,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room21 = new Room(room21Layout);
-  
+
   int[][] room22Layout = {
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -136,7 +136,7 @@ void setup(){
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
   };
   Room room22 = new Room(room22Layout);
-  
+
   gameMap = new Map(new Room[3][3]);
   gameMap.setRoom(0, 0, room00);
   gameMap.setRoom(0, 1, room01);
@@ -150,43 +150,35 @@ void setup(){
 
   p1 = new Player(3, 8, "eggie", 50);
   entityList.add(p1);
-  
-  for(int i = 0; i<3; i++){
-    spawnEnemy(p1.getCurrentRoom());    
-  }
 
+  for(int i = 0; i<3; i++) {
+    spawnEnemy(p1.getCurrentRoomRow(), p1.getCurrentRoomCol(), randomEnemyCoords());
+  }
 }
 
-void draw(){
+void draw() {
   gameMap.drawMap();
   int eList = entityList.size();
-  for(int i = 0; i < eList; i++){
-    (entityList.get(i)).run();
+  for (int i = 0; i < eList; i++) {
+    if((entityList.get(i).getCurrentRoom()).equals(p1.getCurrentRoom())){
+      (entityList.get(i)).run();
+    }
   }
-  for(int i = 0; i < bulletList.size(); i++) {
+  for (int i = 0; i < bulletList.size(); i++) {
     //println(bulletList.get(i).lifespan);
     if (bulletList.get(i).run()) {
       i--;
     }
   }
-  
-  if(mousePressed && mouseButton == LEFT){
+
+  if (mousePressed && mouseButton == LEFT) {
     mouseLeft = true;
-  }else{
+  } else {
     mouseLeft = false;
   }
-  
-  if(mouseLeft && (frameCount - p1.getLastShotTime() >= p1.getShootDelay())){
+
+  if (mouseLeft && (frameCount - p1.getLastShotTime() >= p1.getShootDelay())) {
     p1.shoot();
     p1.setLastShotTime(frameCount);
   }
-}
-
-void spawnEnemy(Room room){
-  int newTileX = 0;
-  int newTileY = 0;
-  int randX = (int)random(width-TILE_SIZE) + TILE_SIZE;
-  int randY = (int)random(height-TILE_SIZE) + TILE_SIZE;
-
-  entityList.add(new Enemy(10, 3, "Bob", 50, randX, randY));
 }
