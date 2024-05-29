@@ -1,5 +1,5 @@
 int leversPressed = 0;
-String dead;
+int dead = -1;
 ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
@@ -154,7 +154,11 @@ void setup(){
 
 void draw(){
   gameMap.drawMap();
+  //dead = 1;
   // if player or boss dead then win("player"/"boss")
+  if (dead != -1) {
+    win();
+  }
   int eList = entityList.size();
   for(int i = 0; i < eList; i++){
     (entityList.get(i)).run();
@@ -177,7 +181,19 @@ void draw(){
     p1.setLastShotTime(frameCount);
   }
 }
-void win(String str) {
+void win() {
   // display a win screen
+  if (dead == 0) {
+    // enemy/boss win
+    println("You lose");
+    textSize(128);
+    text("Enemies Win!", 2*width/7-25, height/2);   
+  }
+  if (dead == 1) {
+    // player win
+    println("You win");
+    textSize(128);
+    text("Player Win!", width/3-50, height/2);   
+  }
   // stop draw
 }

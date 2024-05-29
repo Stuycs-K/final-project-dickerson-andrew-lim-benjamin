@@ -102,6 +102,10 @@ public class Player extends Adventurer {
   }
   
   void run() {
+    if (getHP() <= 0) {
+      dead = 0;
+      return;
+    }
     dodgeCD--;
     //shoot();
     interact();
