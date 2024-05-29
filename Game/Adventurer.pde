@@ -5,14 +5,39 @@ public abstract class Adventurer {
   private float radius;
   private String name;
   private PVector position;
-  private int shootDelay = 15;
+  private int shootDelay;
   private int lastShotTime = 0;
-  public Adventurer(boolean ally, int hp, int speed, String name, float radius) {
+  private Room currentRoom;
+  int currentRoomRow;
+  int currentRoomCol;
+  
+  Room getCurrentRoom() {
+    return currentRoom;
+  }
+  void setCurrentRoom(Room room) {
+    currentRoom = room;
+  }
+  int getCurrentRoomRow() {
+    return currentRoomRow;
+  }
+  void setCurrentRoomRow(int currentRoomRow) {
+    this.currentRoomRow = currentRoomRow;
+  }
+  int getCurrentRoomCol() {
+    return currentRoomCol;
+  }
+  void setCurrentRoomCol(int currentRoomCol) {
+    this.currentRoomCol = currentRoomCol;
+  }
+  
+  
+  public Adventurer(boolean ally, int hp, int speed, String name, float radius, int shootDelay) {
     this.ally = ally;
     this.hp = hp;
     this.speed = speed;
     this.name = name;
     this.radius = radius; // use for hitbox distance
+    this.shootDelay = shootDelay;
   }
   int getShootDelay() {
     return shootDelay;
