@@ -1,7 +1,8 @@
 public class Player extends Adventurer {
   private boolean isDodging;
   private int dodgeCD;
-
+  private PShape pmodel = loadShape("shootman-removebg-preview.svg");
+  
   void setHP(int hp) {
     if (!isDodging) { // no damage taken while dodging
       super.setHP(hp);
@@ -140,7 +141,8 @@ public class Player extends Adventurer {
     circle(x, y+d/10, d/14);
   }
   public void drawPlayer(){
-    drawAvatar(this.getX(), this.getY(), getRadius());
+    //drawAvatar(this.getX(), this.getY(), getRadius());
+    shape(pmodel, this.getX(),this.getY(), getRadius(), getRadius());
     //fill(255);
     //circle(this.getX(), this.getY(), getRadius());
   }

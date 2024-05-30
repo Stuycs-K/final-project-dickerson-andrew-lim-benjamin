@@ -79,3 +79,7 @@ Delete bullets when swap room
 
 Displayed win/loss after player/boss deaths
 Added avatar displayed
+
+### 5/30/24
+
+Found and replaced player image with a svg image
