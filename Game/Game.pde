@@ -1,4 +1,5 @@
 int leversPressed = 0;
+boolean bossSpawned = false;
 int dead = -1;
 ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
@@ -73,8 +74,8 @@ void setup() {
     {9, 0, 0, 0, 3, 0, 0, 0, 0, 0, 4, 4, 0, 7, 1},
     {1, 0, 3, 1, 1, 0, 0, 0, 0, 4, 4, 4, 0, 0, 1},
     {1, 0, 0, 0, 7, 0, 0, 0, 0, 4, 4, 4, 4, 0, 9},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 1},
+    {1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 4, 4, 4, 4, 1},
+    {1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 4, 4, 4, 4, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1}
@@ -169,6 +170,9 @@ void draw() {
   if (dead != -1) {
     win();
   }
+  
+  spawnBoss();
+  
   int eList = entityList.size();
   for (int i = 0; i < eList; i++) {
     if((entityList.get(i).getCurrentRoom()).equals(p1.getCurrentRoom())){
