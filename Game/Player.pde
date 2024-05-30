@@ -100,7 +100,7 @@ public class Player extends Adventurer {
     //  print("called");
     //  return;
     //}
-    print(getHP());
+    //print(getHP());
     dodgeCD--;
     interact();
     move();
