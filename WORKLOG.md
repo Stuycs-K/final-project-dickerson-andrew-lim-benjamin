@@ -58,3 +58,8 @@ Got direction and hitboxes working for bullets
 Working dodge and dodgeImmunity
 Working lifeSpan
 Delete bullets when swap room
+
+### 5/29/24
+
+Displayed win/loss after player/boss deaths
+Added avatar displayed

@@ -123,9 +123,33 @@ public class Player extends Adventurer {
     this.setPosition(width/2, height/2);
   }
   
-  public void drawPlayer(){
+  public void drawAvatar(float x, float y, float r){
+    float d = r*2; // need to scale down
+    //fill(200);
     fill(255);
-    circle(this.getX(), this.getY(), getRadius());
+    stroke(255);
+    circle(x, y, d/2);
+    fill(color(170,197,15)); // blue
+    circle(x-d/8, y-d/8, d/20);
+    circle(x+d/8, y-d/8, d/20);
+    stroke(0);
+    line(x-d/5, y, x, y + d/8);
+    line(x-d/7, y+d/8, x, y + d/8);
+    line(x, y+d/8, x+d/5, y);
+    line(x, y+d/8, x+d/7, y+d/8);
+    //stroke(255);
+    //fill(255);
+    fill(color(223,197,123));
+    //fill(color(239,195,202)); // rose
+    circle(x, y+d/10, d/8);
+    circle(x, y+d/10, d/10);
+    fill(color(184,211,245)); // blue
+    circle(x, y+d/10, d/14);
+  }
+  public void drawPlayer(){
+    drawAvatar(this.getX(), this.getY(), getRadius());
+    //fill(255);
+    //circle(this.getX(), this.getY(), getRadius());
   }
   
 }
