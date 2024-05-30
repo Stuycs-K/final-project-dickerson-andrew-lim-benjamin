@@ -34,6 +34,22 @@
 - Player can now hold left click to fire continuously.
 - Added breaking of breakable tiles by shooting.
 
+### 5/28/24
+
+- Added basic enemy movement using random ints.
+- Added enemy spawning at valid random locations.
+- Made enemies only run if they are in the same room as the player.
+- Changed Bullet class and shoot() implementation to be compatible with shoot() for enemies later.
+- Crash issue where player enters top door before any others.
+
+### 5/29/24
+
+- Fixed door issues created by overlap of variables in player and adventurer classes.
+- Added random number of enemy spawns to each room. 
+- Adjusted random movement patterns to choose a different direction upon hitting wall and to occasionally move towards the player.
+- Adjusted bullet base speed to be more playable.
+- Implemented enemy shooting towards player.
+
 ## Benjamin Lim
 
 ### 5/22/24
