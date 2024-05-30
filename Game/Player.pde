@@ -9,7 +9,9 @@ public class Player extends Adventurer {
   }
 
   void shoot() {
-    bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom()));
+    if (getHP()>0){
+      bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom()));
+    }
   }
   void dodge() {
     //print("DODGE");
@@ -92,10 +94,12 @@ public class Player extends Adventurer {
   }
  
   void run() {
-    if (getHP() <= 0) {
-      dead = 0;
-      return;
-    }
+    //if (getHP() <= 0) {
+    //  dead = 0;
+    //  print("called");
+    //  return;
+    //}
+    //print(getHP());
     dodgeCD--;
     interact();
     move();

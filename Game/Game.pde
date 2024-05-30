@@ -167,29 +167,36 @@ void draw() {
   gameMap.drawMap();
   //dead = 1;
   // if player or boss dead then win("player"/"boss")
-  if (dead != -1) {
+  if (dead != -1) { // if game is over
+    //print(dead);
     win();
   }
-  
-  spawnBoss();
-  
-  int eList = entityList.size();
-  for (int i = 0; i < eList; i++) {
-    if((entityList.get(i).getCurrentRoom()).equals(p1.getCurrentRoom())){
-      if((entityList.get(i)).getHP() > 0){
-        (entityList.get(i)).run();
-      }
-      else{
-        entityList.remove(entityList.get(i));
-        i--;
-        eList--;
+  else{ // run game loop
+    spawnBoss();
+    int eList = entityList.size();
+    for (int i = 0; i < eList; i++) {
+      if((entityList.get(i).getCurrentRoom()).equals(p1.getCurrentRoom())){
+        if((entityList.get(i)).getHP() > 0){
+          (entityList.get(i)).run();
+        }
+        else{
+          if (Player.class.isInstance(entityList.get(i))) {
+            dead = 0;
+          }
+          if (Boss.class.isInstance(entityList.get(i))) {
+            dead = 1;
+          }
+          entityList.remove(entityList.get(i));
+          i--;
+          eList--;
+        }
       }
     }
-  }
-  for (int i = 0; i < bulletList.size(); i++) {
-    //println(bulletList.get(i).lifespan);
-    if (bulletList.get(i).run()) {
-      i--;
+    for (int i = 0; i < bulletList.size(); i++) {
+      //println(bulletList.get(i).lifespan);
+      if (bulletList.get(i).run()) {
+        i--;
+      }
     }
   }
 
@@ -208,13 +215,13 @@ void win() {
   // display a win screen
   if (dead == 0) {
     // enemy/boss win
-    println("You lose");
+    //println("You lose");
     textSize(128);
     text("Enemies Win!", 2*width/7-25, height/2);   
   }
   if (dead == 1) {
     // player win
-    println("You win");
+    //println("You win");
     textSize(128);
     text("Player Win!", width/3-50, height/2);   
   }
