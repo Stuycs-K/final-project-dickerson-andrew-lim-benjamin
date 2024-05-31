@@ -58,7 +58,8 @@ public class Tile {
       noStroke();
     }
     rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
-  }
+  
+}
   
   public void run(){
 

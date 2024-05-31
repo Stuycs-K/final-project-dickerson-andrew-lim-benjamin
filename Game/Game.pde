@@ -5,10 +5,12 @@ ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
+PImage waterimg;
 Map gameMap;
 Player p1;
 
 void setup() {
+  waterimg = loadImage("water.jpg");
   surface.setResizable(false);
   size(1500, 1000);
   keyboardInput = new KeyboardBuffer();
