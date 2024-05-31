@@ -1,6 +1,7 @@
 public abstract class Adventurer {
   private boolean ally;
   private int hp;
+  private int maxHP;
   private int speed;
   private float radius;
   private String name;
@@ -13,6 +14,12 @@ public abstract class Adventurer {
   
   Room getCurrentRoom() {
     return currentRoom;
+  }
+  int getCurrentRoomHeight() {
+    return getCurrentRoom().room.length;
+  }
+  int getCurrentRoomLength() {
+    return getCurrentRoom().room[0].length;
   }
   void setCurrentRoom(Room room) {
     currentRoom = room;
@@ -34,6 +41,7 @@ public abstract class Adventurer {
   public Adventurer(boolean ally, int hp, int speed, String name, float radius, int shootDelay) {
     this.ally = ally;
     this.hp = hp;
+    this.maxHP = hp;
     this.speed = speed;
     this.name = name;
     this.radius = radius; // use for hitbox distance
@@ -59,6 +67,9 @@ public abstract class Adventurer {
   }
   void setHP(int hp) {
     this.hp = hp;
+  }
+  int getMaxHP() {
+    return maxHP;
   }
   int getSpeed() {
     return speed;
