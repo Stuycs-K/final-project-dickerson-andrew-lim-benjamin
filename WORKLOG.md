@@ -50,6 +50,11 @@
 - Adjusted bullet base speed to be more playable.
 - Implemented enemy shooting towards player.
 
+### 5/30/24
+
+- Implemented basic boss enemy extension.
+- Changed boss spawning method to also change players current room to center room, position to below boss, and to change all surrounding doors to walls.
+
 ## Benjamin Lim
 
 ### 5/22/24
