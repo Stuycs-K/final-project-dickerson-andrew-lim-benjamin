@@ -37,6 +37,17 @@ public void spawnBoss(){
     int speed = 3;
     String name = "BeezleBob";
     int radius = 75;
-    entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1)); 
+    entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
+    
+    p1.setCurrentRoom(gameMap.getRoom(1,1));
+    p1.setPosition(width/2, (int)((height/2)*1.5));
+    for(int r = 0; r<p1.getCurrentRoom().room.length; r++){
+      for(int c = 0; c<p1.getCurrentRoom().room[0].length; c++){
+        Tile newTile = p1.getCurrentRoom().room[r][c];
+        if(newTile.isOfType("Door")){
+          p1.getCurrentRoom().room[r][c] = new Wall();
+        }
+      }
+    }
   }
 }
