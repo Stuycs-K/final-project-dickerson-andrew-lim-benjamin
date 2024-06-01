@@ -9,7 +9,7 @@ public class Boss extends Enemy {
     if (frameCount - getLastShotTime() >= getShootDelay()) {
       int dmg = 1;
       float lifespan = 50;
-      float size = 20;
+      float size = 30;
       color c = color(252,26,82);
       int speed = 9;
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), p1.getX(), p1.getY(), speed, getAllyStatus(), getCurrentRoom()));
@@ -19,7 +19,7 @@ public class Boss extends Enemy {
 
   public void drawEnemy(){
     fill(128,0,128);
-    circle(this.getX(), this.getY(), getRadius());
+    circle(this.getX(), this.getY(), getRadius()+20); // hurtbox is buggy
   }
 
   void run() {
@@ -33,10 +33,10 @@ public class Boss extends Enemy {
 public void spawnBoss(){
   if(leversPressed >= 3 && !bossSpawned){
     bossSpawned = true;
-    int hp = 10;
+    int hp = 20;
     int speed = 3;
     String name = "BeezleBob";
-    int radius = 75;
+    int radius = 100;
     entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
     
     p1.setCurrentRoom(gameMap.getRoom(1,1));
