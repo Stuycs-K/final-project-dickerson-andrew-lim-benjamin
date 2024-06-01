@@ -1,7 +1,7 @@
 public class Player extends Adventurer {
   private boolean isDodging;
   private int dodgeCD;
-  private PShape pmodel = loadShape("shootman-removebg-preview.svg");
+  private PShape pmodel = loadShape("Images/shootman-removebg-preview.svg");
   
   void setHP(int hp) {
     if (!isDodging) { // no damage taken while dodging
@@ -143,10 +143,21 @@ public class Player extends Adventurer {
   }
   */
   public void drawPlayer(){
-    //drawAvatar(this.getX(), this.getY(), getRadius());
-    //shape(pmodel, this.getX(),this.getY(), getRadius(), getRadius());
-    fill(255);
-    circle(this.getX(), this.getY(), getRadius());
+    PImage playerImg = p1up;
+    if (keyboardInput.P1_UP) {
+      playerImg = p1up;
+    }
+    if (keyboardInput.P1_DOWN) {
+      playerImg = p1down;
+    }
+    if (keyboardInput.P1_LEFT) {
+      playerImg = p1left;
+    }
+    if (keyboardInput.P1_RIGHT) {
+      playerImg = p1right;
+    }
+    float imgSize = getRadius()*1.5;
+    image(playerImg, getX()-imgSize/2, getY()-imgSize/2, imgSize, imgSize);
   }
   
   public void drawHealthBar(){

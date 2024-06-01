@@ -54,7 +54,7 @@ public class Room {
   public void drawRoom(){
     for(int r = 0; r<room.length; r++){
       for(int c = 0; c<room[0].length; c++){
-         room[r][c].drawTile(c*100, r*100);
+         room[r][c].drawTile(c*TILE_SIZE, r*TILE_SIZE);
       }
     }
   }
