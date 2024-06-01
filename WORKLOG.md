@@ -55,6 +55,17 @@
 - Implemented basic boss enemy extension.
 - Changed boss spawning method to also change players current room to center room, position to below boss, and to change all surrounding doors to walls.
 
+### 5/31/24
+
+- Added a basic health bar that changes color based on percentage of player hp.
+
+### 6/1/24
+
+- Fixed issue where game crashes on boss spawn. 
+- Moved initialization of map rooms and all images to seperate files for visibility.
+- Added player model that changes based on direction of movement.
+- Issue with image loading causing game to run very slow.
+
 ## Benjamin Lim
 
 ### 5/22/24
