@@ -17,7 +17,7 @@ Player p1;
 
 void setup() {
   size(1500, 1000);
-  //surface.setResizable(false);
+  surface.setResizable(true);
   //fullScreen();
   
   waterimg = loadImage("Images/water.jpg");
@@ -96,12 +96,14 @@ void win() {
   if (dead == 0) {
     // enemy/boss win
     //println("You lose");
+    fill(0);
     textSize(128);
     text("Enemies Win!", 2*width/7-25, height/2);   
   }
   if (dead == 1) {
     // player win
     //println("You win");
+    fill(0);
     textSize(128);
     text("Player Win!", width/3-50, height/2);   
   }

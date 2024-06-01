@@ -8,7 +8,7 @@ public class Boss extends Enemy {
   void shoot() {
     if (frameCount - getLastShotTime() >= getShootDelay()) {
       int dmg = 1;
-      float lifespan = 30;
+      float lifespan = 50;
       float size = 20;
       color c = color(252,26,82);
       int speed = 9;
