@@ -151,7 +151,7 @@ void setup() {
   gameMap.setRoom(2, 1, room21);
   gameMap.setRoom(2, 2, room22);
 
-  p1 = new Player(3, 8, "eggie", 50);
+  p1 = new Player(6, 8, "eggie", 50);
   entityList.add(p1);
 
   //COMMENT THIS OUT TO REMOVE ENEMY SPAWNING FOR TESTING PURPOSES:

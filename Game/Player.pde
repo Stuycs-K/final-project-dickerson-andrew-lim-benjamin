@@ -105,6 +105,7 @@ public class Player extends Adventurer {
     interact();
     move();
     drawPlayer();
+    drawHealthBar();
   }
  
   public Player(int hp, int speed, String name, int radius) {
@@ -116,7 +117,7 @@ public class Player extends Adventurer {
     setCurrentRoomCol(1);
     this.setPosition(width/2, height/2);
   }
-  
+  /*
   public void drawAvatar(float x, float y, float r){
     float d = r*2;
     //fill(200);
@@ -140,11 +141,30 @@ public class Player extends Adventurer {
     fill(color(184,211,245)); // blue
     circle(x, y+d/10, d/14);
   }
+  */
   public void drawPlayer(){
     //drawAvatar(this.getX(), this.getY(), getRadius());
-    shape(pmodel, this.getX(),this.getY(), getRadius(), getRadius());
-    //fill(255);
-    //circle(this.getX(), this.getY(), getRadius());
+    //shape(pmodel, this.getX(),this.getY(), getRadius(), getRadius());
+    fill(255);
+    circle(this.getX(), this.getY(), getRadius());
+  }
+  
+  public void drawHealthBar(){
+    color c = color(255);
+    if(getHP() > (int)getMaxHP()*2/3){
+      c = color(35,190,64);
+    }else if(getHP() <= (int)getMaxHP()*2/3 && getHP() > (int)getMaxHP()/3){
+      c = color(255,209,70);
+    }else{
+      c = color(237,24,49); 
+    }
+    fill(c);
+    float v1X = TILE_SIZE/2;
+    float v1Y = p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5;
+    float vShift = 10;
+    quad(v1X, v1Y, v1X+300, v1Y, v1X+300-vShift, v1Y-20, v1X-vShift, v1Y-20);
+    //rect(TILE_SIZE/2, p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5, 300, 20);
+    //rect(0, 0, 100, 100);
   }
  
 }
