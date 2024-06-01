@@ -41,8 +41,8 @@ public void spawnBoss(){
     
     p1.setCurrentRoom(gameMap.getRoom(1,1));
     p1.setPosition(width/2, (int)((height/2)*1.5));
-    for(int r = 0; r<p1.getCurrentRoomLength(); r++){
-      for(int c = 0; c<p1.getCurrentRoomHeight(); c++){
+    for(int r = 0; r<p1.getCurrentRoomHeight(); r++){
+      for(int c = 0; c<p1.getCurrentRoomLength(); c++){
         Tile newTile = p1.getCurrentRoom().room[r][c];
         if(newTile.isOfType("Door")){
           p1.getCurrentRoom().room[r][c] = new Wall();
