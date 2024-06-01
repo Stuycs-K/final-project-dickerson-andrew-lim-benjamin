@@ -5,11 +5,18 @@ ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
+PImage waterimg;
+PImage dirtwallimg;
+PImage grassimg;
 Map gameMap;
 Player p1;
 
 void setup() {
-  surface.setResizable(false);
+  waterimg = loadImage("water.jpg");
+  dirtwallimg = loadImage("grassydirtwall.jpg");
+  grassimg = loadImage("grass.jpg");
+  //surface.setResizable(false);
+  //fullScreen();
   size(1500, 1000);
   keyboardInput = new KeyboardBuffer();
   int[][] room00Layout = {

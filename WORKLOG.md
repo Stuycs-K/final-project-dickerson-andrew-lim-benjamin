@@ -88,3 +88,9 @@ Added avatar displayed
 ### 5/30/24
 
 Found and replaced player image with a svg image
+
+### 6/1/24
+
+Updated tile drawTile()s and tiles to display image by calling drawTile in Tile class
+Added image for walls: edge walls are grass, interior are dirt w grass top
+Found a bug with boss room spawning having index oob exception

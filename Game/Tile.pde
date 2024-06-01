@@ -48,9 +48,12 @@ public class Tile {
   public boolean getBreakability(){
     return breakable;
   }
-  
-  public void drawTile(int xcor, int ycor){
-    rect(xcor, ycor, 100, 100);
+  public void drawTile(int xcor, int ycor) {
+    // should be overwritten
+    rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
+  }
+  public void drawTile(int xcor, int ycor, PImage img){
+    image(img, xcor, ycor, TILE_SIZE, TILE_SIZE);
   }
   public void drawTile(int xcor, int ycor, color c, boolean stroke){
     fill(c);
@@ -58,7 +61,8 @@ public class Tile {
       noStroke();
     }
     rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
-  }
+  
+}
   
   public void run(){
 
