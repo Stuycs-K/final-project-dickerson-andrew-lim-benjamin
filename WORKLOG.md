@@ -105,3 +105,5 @@ Found and replaced player image with a svg image
 Updated tile drawTile()s and tiles to display image by calling drawTile in Tile class
 Added image for walls: edge walls are grass, interior are dirt w grass top
 Found a bug with boss room spawning having index oob exception
+
+Removed images from display for better performance

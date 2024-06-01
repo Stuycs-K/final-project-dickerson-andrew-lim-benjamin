@@ -5,9 +5,9 @@ ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
-PImage waterimg;
-PImage dirtwallimg;
-PImage grassimg;
+//PImage waterimg;
+//PImage dirtwallimg;
+//PImage grassimg;
 PImage p1up;
 PImage p1down;
 PImage p1left;
@@ -17,12 +17,12 @@ Player p1;
 
 void setup() {
   size(1500, 1000);
-  surface.setResizable(true);
+  surface.setResizable(false);
   //fullScreen();
   
-  waterimg = loadImage("Images/water.jpg");
-  dirtwallimg = loadImage("Images/grassydirtwall.jpg");
-  grassimg = loadImage("Images/grass.jpg");
+  //waterimg = loadImage("Images/water.jpg");
+  //dirtwallimg = loadImage("Images/grassydirtwall.jpg");
+  //grassimg = loadImage("Images/grass.jpg");
   p1up = loadImage("Images/p1up.png");
   p1down = loadImage("Images/p1down.png");
   p1left = loadImage("Images/p1left.png");
