@@ -1,7 +1,12 @@
 public class Boss extends Enemy {
+  private int chargelen;
+  private int shotcount;
+  private int nextact;
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
+    chargelen = 0;
+    nextact = 3;
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -14,16 +19,35 @@ public class Boss extends Enemy {
       int speed = 9;
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), p1.getX(), p1.getY(), speed, getAllyStatus(), getCurrentRoom()));
       setLastShotTime(frameCount);
+      shotcount++;
     }
   }
-
+  void charge() {
+    println("raah" + shotcount);
+    shotcount = 0;
+  }
+  void AOE() {
+    
+  }
+  void shockWave() {
+    
+  }
+  
   public void drawEnemy(){
     fill(128,0,128);
     circle(this.getX(), this.getY(), getRadius());
   }
 
   void run() {
-    shoot();
+    int choice = (int)(Math.random() * 2) + 1; // 1-2
+    if (choice == 1) {
+      shoot();
+    }
+    if (shotcount >= nextact) {
+      charge();
+      // random of 3 actions
+      nextact = (int)(Math.random() * 3) + 2; // 2 - 4
+    }
     move();
     drawEnemy(); 
   }
