@@ -26,7 +26,7 @@ void setup() {
   entityList.add(p1);
   
   waterimg = loadImage("Images/water.jpg");
-  dirtwallimg = loadImage("Images/grassydirtwall.jpg");
+  dirtwallimg = loadImage("Images/grassydirtwall.png");
   grassimg = loadImage("Images/grass.jpg");
   p1up = loadImage("Images/p1up.png");
   p1down = loadImage("Images/p1down.png");
