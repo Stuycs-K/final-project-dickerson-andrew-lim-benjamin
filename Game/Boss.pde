@@ -1,7 +1,12 @@
 public class Boss extends Enemy {
+  private int chargelen;
+  private int shotcount;
+  private int nextact;
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
+    chargelen = 0;
+    nextact = 3;
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -14,9 +19,28 @@ public class Boss extends Enemy {
       int speed = 9;
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), p1.getX(), p1.getY(), speed, getAllyStatus(), getCurrentRoom()));
       setLastShotTime(frameCount);
+      shotcount++;
     }
   }
-
+  void charge() {
+    println("raah" + shotcount);
+  }
+  void AOE() { // skystrike
+    
+  }
+  void shockWave() {
+    
+  }
+  void bulletRing() {
+    int dmg = 1;
+    float lifespan = 200;
+    float size = 40;
+    color c = color(191,214,65);
+    int speed = 5;
+    for (int deg = 0; deg < 360; deg += (int) (Math.random() * 6) + 15) { // every 15-20 deg
+      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
+    }
+  }
   public void drawEnemy(){
     fill(128,0,128);
     circle(this.getX(), this.getY(), getRadius()+20); // hurtbox is buggy
@@ -24,6 +48,21 @@ public class Boss extends Enemy {
 
   void run() {
     shoot();
+    if (shotcount >= nextact) {
+      // random of 3 actions
+      int choice = (int)(Math.random() * 3) + 1; // 1 - 3
+      nextact = (int)(Math.random() * 2) + 1; // 1 - 2 cd
+      if (choice == 1) {
+        charge();
+      }
+      else if (choice == 2) {
+        bulletRing();
+      }
+      else if (choice == 3) {
+        shockWave();
+      }
+      shotcount = 0;
+    }
     move();
     drawEnemy(); 
   }

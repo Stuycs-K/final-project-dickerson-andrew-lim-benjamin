@@ -53,7 +53,7 @@ public class Tile {
     rect(xcor, ycor, TILE_SIZE, TILE_SIZE);
   }
   public void drawTile(int xcor, int ycor, PImage img){
-    image(img, xcor, ycor, TILE_SIZE, TILE_SIZE);
+    image(img, xcor, ycor);
   }
   public void drawTile(int xcor, int ycor, color c, boolean stroke){
     fill(c);

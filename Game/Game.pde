@@ -5,9 +5,9 @@ ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
-//PImage waterimg;
-//PImage dirtwallimg;
-//PImage grassimg;
+PImage waterimg;
+PImage dirtwallimg;
+PImage grassimg;
 PImage p1up;
 PImage p1down;
 PImage p1left;
@@ -19,10 +19,6 @@ void setup() {
   size(1500, 1000);
   surface.setResizable(false);
   //fullScreen();
-  
-  //waterimg = loadImage("Images/water.jpg");
-  //dirtwallimg = loadImage("Images/grassydirtwall.jpg");
-  //grassimg = loadImage("Images/grass.jpg");
   p1up = loadImage("Images/p1up.png");
   p1down = loadImage("Images/p1down.png");
   p1left = loadImage("Images/p1left.png");
@@ -32,6 +28,22 @@ void setup() {
   gameMap = initializeMap();
   p1 = new Player(6, 8, "eggie", 50);
   entityList.add(p1);
+  
+  waterimg = loadImage("Images/water.jpg");
+  dirtwallimg = loadImage("Images/grassydirtwall.png");
+  grassimg = loadImage("Images/grass.jpg");
+  p1up = loadImage("Images/p1up.png");
+  p1down = loadImage("Images/p1down.png");
+  p1left = loadImage("Images/p1left.png");
+  p1right = loadImage("Images/p1right.png");
+  waterimg.resize(TILE_SIZE, TILE_SIZE);
+  dirtwallimg.resize(TILE_SIZE, TILE_SIZE);
+  grassimg.resize(TILE_SIZE, TILE_SIZE);
+  int playerImgSize = (int)(p1.getRadius()*1.5);
+  p1up.resize(playerImgSize, playerImgSize);
+  p1down.resize(playerImgSize, playerImgSize);
+  p1left.resize(playerImgSize, playerImgSize);
+  p1right.resize(playerImgSize, playerImgSize);
 
   //COMMENT THIS OUT TO REMOVE ENEMY SPAWNING FOR TESTING PURPOSES:
   for(int r = 0; r<gameMap.getRows(); r++){

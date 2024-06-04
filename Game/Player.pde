@@ -157,7 +157,7 @@ public class Player extends Adventurer {
       playerImg = p1right;
     }
     float imgSize = getRadius()*1.5;
-    image(playerImg, getX()-imgSize/2, getY()-imgSize/2, imgSize, imgSize);
+    image(playerImg, getX()-imgSize/2, getY()-imgSize/2);
   }
   
   public void drawHealthBar(){
