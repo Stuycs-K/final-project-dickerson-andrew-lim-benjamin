@@ -2,11 +2,13 @@ public class Boss extends Enemy {
   private int chargelen;
   private int shotcount;
   private int nextact;
+  PVector charge;
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
     chargelen = 0;
     nextact = 3;
+    charge = new PVector();
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -14,7 +16,7 @@ public class Boss extends Enemy {
     if (frameCount - getLastShotTime() >= getShootDelay()) {
       int dmg = 1;
       float lifespan = 50;
-      float size = 30;
+      float size = 20;
       color c = color(252,26,82);
       int speed = 9;
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), p1.getX(), p1.getY(), speed, getAllyStatus(), getCurrentRoom()));
@@ -24,6 +26,7 @@ public class Boss extends Enemy {
   }
   void charge() {
     println("raah" + shotcount);
+    chargelen = 20; // frames
   }
   void AOE() { // skystrike
     
@@ -43,7 +46,7 @@ public class Boss extends Enemy {
   }
   public void drawEnemy(){
     fill(128,0,128);
-    circle(this.getX(), this.getY(), getRadius()+20); // hurtbox is buggy
+    circle(this.getX(), this.getY(), getRadius()); // hurtbox is buggy
   }
 
   void run() {
@@ -56,15 +59,26 @@ public class Boss extends Enemy {
         charge();
       }
       else if (choice == 2) {
-        bulletRing();
+        bulletRing(); // hitboxes def buggy, fix later
       }
       else if (choice == 3) {
         shockWave();
       }
       shotcount = 0;
     }
-    move();
+    if (chargelen == 0) {
+      move();
+    }
+    else {
+      if (chargelen == 20) {
+        charge = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);
+        charge.normalize();
+      }
+      getPosition().add(PVector.mult(charge, 10));
+      chargelen--;
+    }
     drawEnemy(); 
+    //println(chargelen);
   }
 
 }
@@ -75,7 +89,7 @@ public void spawnBoss(){
     int hp = 20;
     int speed = 3;
     String name = "BeezleBob";
-    int radius = 100;
+    int radius = 75;
     entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
     
     p1.setCurrentRoom(gameMap.getRoom(1,1));

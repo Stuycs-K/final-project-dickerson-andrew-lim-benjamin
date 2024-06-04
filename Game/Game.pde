@@ -84,6 +84,7 @@ void draw() {
         }
       }
     }
+    //println(bulletList.size());
     for (int i = 0; i < bulletList.size(); i++) {
       //println(bulletList.get(i).lifespan);
       if (bulletList.get(i).run()) {
