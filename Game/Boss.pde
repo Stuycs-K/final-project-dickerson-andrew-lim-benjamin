@@ -24,29 +24,44 @@ public class Boss extends Enemy {
   }
   void charge() {
     println("raah" + shotcount);
-    shotcount = 0;
   }
-  void AOE() {
+  void AOE() { // skystrike
     
   }
   void shockWave() {
     
   }
-  
+  void bulletRing() {
+    int dmg = 1;
+    float lifespan = 200;
+    float size = 40;
+    color c = color(191,214,65);
+    int speed = 5;
+    for (int deg = 0; deg < 360; deg += (int) (Math.random() * 6) + 15) { // every 15-20 deg
+      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
+    }
+  }
   public void drawEnemy(){
     fill(128,0,128);
     circle(this.getX(), this.getY(), getRadius());
   }
 
   void run() {
-    int choice = (int)(Math.random() * 2) + 1; // 1-2
-    if (choice == 1) {
-      shoot();
-    }
+    shoot();
     if (shotcount >= nextact) {
-      charge();
       // random of 3 actions
-      nextact = (int)(Math.random() * 3) + 2; // 2 - 4
+      int choice = (int)(Math.random() * 3) + 1; // 1 - 3
+      nextact = (int)(Math.random() * 2) + 1; // 1 - 2 cd
+      if (choice == 1) {
+        charge();
+      }
+      else if (choice == 2) {
+        bulletRing();
+      }
+      else if (choice == 3) {
+        shockWave();
+      }
+      shotcount = 0;
     }
     move();
     drawEnemy(); 
