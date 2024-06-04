@@ -26,13 +26,14 @@ public class Boss extends Enemy {
   }
   void charge() {
     println("raah" + shotcount);
-    chargelen = 20; // frames
+    chargelen = 25; // frames
   }
   void AOE() { // skystrike
-    
+    // highlight a square around player and update in run(), do damage and display graphic after x time
   }
   void shockWave() {
-    
+    // ideas: tiles emanating from boss update image w/ earthquake texture and deal damage if standing
+    // new kind of bullet goes square by square
   }
   void bulletRing() {
     int dmg = 1;
@@ -59,10 +60,13 @@ public class Boss extends Enemy {
         charge();
       }
       else if (choice == 2) {
-        bulletRing(); // hitboxes def buggy, fix later
+        bulletRing(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
       }
       else if (choice == 3) {
         shockWave();
+      }
+      else if (choice == 4) {
+        AOE();
       }
       shotcount = 0;
     }
@@ -70,7 +74,7 @@ public class Boss extends Enemy {
       move();
     }
     else {
-      if (chargelen == 20) {
+      if (chargelen == 25) {
         charge = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);
         charge.normalize();
       }

@@ -107,3 +107,10 @@ Added image for walls: edge walls are grass, interior are dirt w grass top
 Found a bug with boss room spawning having index oob exception
 
 Removed images from display for better performance
+
+### 6/4/24
+
+Worked on bossmoves:
+Working ring of bullets except for hitboxes a bit off
+Working charge except for collision w walls
+developed ideas for shockwave and aoe

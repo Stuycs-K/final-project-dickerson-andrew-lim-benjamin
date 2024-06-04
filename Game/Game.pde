@@ -57,6 +57,7 @@ void setup() {
 
 void draw() {
   gameMap.drawMap();
+  // other idea: make currentRoom an empty room for bossArena
   //dead = 1;
   // if player or boss dead then win("player"/"boss")
   if (dead != -1) { // if game is over
