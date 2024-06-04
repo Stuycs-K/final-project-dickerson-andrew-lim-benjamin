@@ -11,12 +11,17 @@ public class Wall extends Tile {
   public void drawTile(int xcor, int ycor){
     //color c = color(204,76,58);
     //super.drawTile(xcor, ycor, c, false);
-    if (xcor >= TILE_SIZE && xcor < width - TILE_SIZE && ycor < height - TILE_SIZE) {
-    image(dirtwallimg, xcor, ycor);
+    if (xcor >= 0 && xcor < width && ycor < TILE_SIZE) {
+      image(grassydirtwall, xcor, ycor); 
+    }else if (ycor < height-TILE_SIZE){
+      image(dirtwallupper, xcor, ycor);//replace with brick wall ltr
+    }else {
+      image(dirtwalllower, xcor, ycor);//replace with brick wall ltr
     }
-    else {
-      image(grassimg, xcor, ycor);
+    if (xcor >= TILE_SIZE && xcor < width - TILE_SIZE && ycor >= TILE_SIZE && ycor < height - TILE_SIZE) {
+      image(uncracked, xcor, ycor); 
     }
+
   }
 
 }

@@ -11,11 +11,12 @@ public class Lever extends Tile {
   }
   
   public void drawTile(int xcor, int ycor){
-    color c = color(214, 201, 192);
+    super.drawTile(xcor, ycor, floor);
     if(isToggled()){
-      c = color(255, 235, 84);
+      image(lever, xcor, ycor);
+    }else{
+      image(levertoggled, xcor, ycor); 
     }
-    super.drawTile(xcor, ycor, c, false);
   }
   
   public boolean isToggled(){

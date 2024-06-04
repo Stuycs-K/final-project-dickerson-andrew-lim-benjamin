@@ -1,7 +1,6 @@
 public class Player extends Adventurer {
   private boolean isDodging;
   private int dodgeCD;
-  private PShape pmodel = loadShape("Images/shootman-removebg-preview.svg");
   
   void setHP(int hp) {
     if (!isDodging) { // no damage taken while dodging
@@ -95,12 +94,6 @@ public class Player extends Adventurer {
   }
  
   void run() {
-    //if (getHP() <= 0) {
-    //  dead = 0;
-    //  print("called");
-    //  return;
-    //}
-    //print(getHP());
     dodgeCD--;
     interact();
     move();
@@ -117,31 +110,7 @@ public class Player extends Adventurer {
     setCurrentRoomCol(1);
     this.setPosition(width/2, height/2);
   }
-  /*
-  public void drawAvatar(float x, float y, float r){
-    float d = r*2;
-    //fill(200);
-    fill(255);
-    stroke(255);
-    circle(x, y, d/2);
-    fill(color(170,197,15)); // blue
-    circle(x-d/8, y-d/8, d/20);
-    circle(x+d/8, y-d/8, d/20);
-    stroke(0);
-    line(x-d/5, y, x, y + d/8);
-    line(x-d/7, y+d/8, x, y + d/8);
-    line(x, y+d/8, x+d/5, y);
-    line(x, y+d/8, x+d/7, y+d/8);
-    //stroke(255);
-    //fill(255);
-    fill(color(223,197,123));
-    //fill(color(239,195,202)); // rose
-    circle(x, y+d/10, d/8);
-    circle(x, y+d/10, d/10);
-    fill(color(184,211,245)); // blue
-    circle(x, y+d/10, d/14);
-  }
-  */
+
   public void drawPlayer(){
     PImage playerImg = p1up;
     if (keyboardInput.P1_UP) {
@@ -174,8 +143,6 @@ public class Player extends Adventurer {
     float v1Y = p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5;
     float vShift = 10;
     quad(v1X, v1Y, v1X+300, v1Y, v1X+300-vShift, v1Y-20, v1X-vShift, v1Y-20);
-    //rect(TILE_SIZE/2, p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5, 300, 20);
-    //rect(0, 0, 100, 100);
   }
  
 }

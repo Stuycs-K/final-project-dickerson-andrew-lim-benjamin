@@ -5,13 +5,8 @@ ArrayList<Adventurer> entityList = new ArrayList<Adventurer>();
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
-PImage waterimg;
-PImage dirtwallimg;
-PImage grassimg;
-PImage p1up;
-PImage p1down;
-PImage p1left;
-PImage p1right;
+HashMap<String, PImage> imageMap;
+PImage floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right;
 Map gameMap;
 Player p1;
 
@@ -25,21 +20,34 @@ void setup() {
   p1 = new Player(6, 8, "eggie", 50);
   entityList.add(p1);
   
-  waterimg = loadImage("Images/water.jpg");
-  dirtwallimg = loadImage("Images/grassydirtwall.png");
-  grassimg = loadImage("Images/grass.jpg");
-  p1up = loadImage("Images/p1up.png");
-  p1down = loadImage("Images/p1down.png");
-  p1left = loadImage("Images/p1left.png");
-  p1right = loadImage("Images/p1right.png");
-  waterimg.resize(TILE_SIZE, TILE_SIZE);
-  dirtwallimg.resize(TILE_SIZE, TILE_SIZE);
-  grassimg.resize(TILE_SIZE, TILE_SIZE);
-  int playerImgSize = (int)(p1.getRadius()*1.5);
-  p1up.resize(playerImgSize, playerImgSize);
-  p1down.resize(playerImgSize, playerImgSize);
-  p1left.resize(playerImgSize, playerImgSize);
-  p1right.resize(playerImgSize, playerImgSize);
+  imageMap = new HashMap<String, PImage>();
+
+  String[] imageNames = {"floor", "water", "grassydirtwall(3)", "dirtwallupper(2)", "dirtwalllower(2)", "lever", "levertoggled", "door", "uncracked", "cracked", "p1up", "p1down", "p1left", "p1right"};
+  int playerImgSize = (int)(p1.getRadius() * 1.5);
+  int[] imageSizes = {TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, playerImgSize, playerImgSize, playerImgSize, playerImgSize};
+
+  for (int i = 0; i < imageNames.length; i++) {
+    String imageName = imageNames[i];
+    String imagePath = "Images/" + imageName + ".png";
+    PImage img = loadImage(imagePath);
+    img.resize(imageSizes[i], imageSizes[i]);
+    imageMap.put(imageName, img);
+  }
+
+  floor = imageMap.get("floor");
+  water = imageMap.get("water");
+  grassydirtwall = imageMap.get("grassydirtwall(3)");
+  dirtwallupper = imageMap.get("dirtwallupper(2)");
+  dirtwalllower = imageMap.get("dirtwalllower(2)");
+  lever = imageMap.get("lever");
+  levertoggled = imageMap.get("levertoggled");
+  door = imageMap.get("door");
+  uncracked = imageMap.get("uncracked");
+  cracked = imageMap.get("cracked");
+  p1up = imageMap.get("p1up");
+  p1down = imageMap.get("p1down");
+  p1left = imageMap.get("p1left");
+  p1right = imageMap.get("p1right");
 
   //COMMENT THIS OUT TO REMOVE ENEMY SPAWNING FOR TESTING PURPOSES:
   for(int r = 0; r<gameMap.getRows(); r++){

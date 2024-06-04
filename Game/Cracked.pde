@@ -9,8 +9,7 @@ public class Cracked extends Tile {
   }
   
   public void drawTile(int xcor, int ycor){
-    color c = color(189,127,79);
-    super.drawTile(xcor, ycor, c, false);
+    image(cracked, xcor, ycor); 
   }
 
 }
