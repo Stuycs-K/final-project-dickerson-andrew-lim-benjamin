@@ -66,6 +66,17 @@
 - Added player model that changes based on direction of movement.
 - Issue with image loading causing game to run very slow.
 
+### 6/3/24
+
+- Fixed issue of game slowing due to image resizing
+- Added more tile images
+
+
+### 6/4/24
+
+- Added images for all tile draw methods
+
+
 ## Benjamin Lim
 
 ### 5/22/24
