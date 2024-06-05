@@ -12,12 +12,16 @@ Player p1;
 
 void setup() {
   size(1500, 1000);
-  surface.setResizable(true);
+  surface.setResizable(false);
   //fullScreen();
+  p1up = loadImage("Images/p1up.png");
+  p1down = loadImage("Images/p1down.png");
+  p1left = loadImage("Images/p1left.png");
+  p1right = loadImage("Images/p1right.png");
 
   keyboardInput = new KeyboardBuffer();
   gameMap = initializeMap();
-  p1 = new Player(6, 8, "eggie", 50);
+  p1 = new Player(15, 8, "eggie", 50);
   entityList.add(p1);
   
   imageMap = new HashMap<String, PImage>();
@@ -61,6 +65,7 @@ void setup() {
 
 void draw() {
   gameMap.drawMap();
+  // other idea: make currentRoom an empty room for bossArena
   //dead = 1;
   // if player or boss dead then win("player"/"boss")
   if (dead != -1) { // if game is over
@@ -88,6 +93,7 @@ void draw() {
         }
       }
     }
+    //println(bulletList.size());
     for (int i = 0; i < bulletList.size(); i++) {
       //println(bulletList.get(i).lifespan);
       if (bulletList.get(i).run()) {
