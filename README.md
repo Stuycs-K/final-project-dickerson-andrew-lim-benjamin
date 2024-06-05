@@ -2,5 +2,32 @@
 # APCS2 Final Project
 THIS DOCUMENT IS REQUIRED
 ## Group Info
+
+Andrew Dickerson, Benjamin Lim
+  //Your GROUP Name
+
 ## Overview
+
+This game is a top-down action-based shooter that revolves around the premise of fighting various enemies in a grid of dungeons.
+Three levers are dispersed throughout the dungeon. Toggling all three levers will spawn the boss. Beating the boss wins the player the game. Dying to an enemy loses the game.
+Enemies have random movement in the four cardinal directions, alongside a chance to stand still for a moment, or to directly chase the player.
+
+There are multiple types of tiles that the player will encounter that can make a room more tricky to navigate.
+Wall: Basic tiles that surround the border of the screen as dirt/grass textures and in the middle of the room as brick wall texturees; prevent the player from moving through; cannot be shot through; cannot be broken
+Cracked: Similiar to wall tiles but can can be identified by a worn-down brick wall texture; can be broken with one shot (These are the only breakable tiles)
+Water: Blue tiles that cannot be walked through but can be shot through
+Lever: Previously mentioned
+Door: Sends the player to the next room in the direction the door is facing. (If the door is up, the player will move to the next room up on the map)
+Floor: Sandy-looking tiles that compose the otherwise empty space; can be walked through; can be shot through
+
+
 ## Instructions
+
+No external libraries are required to run this project.
+
+Keybinds:
+WASD for moving up, left, down, and right respectively.
+E to toggle a lever
+
+    Directions on compiling/running your project, including installation of any libraries.
+    Directions for USING your project. Minmally this should include the basic instructions/keybindings, and perhaps the "shortcuts" to show off some features more easily.
