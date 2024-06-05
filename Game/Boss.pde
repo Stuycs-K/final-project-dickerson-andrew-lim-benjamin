@@ -25,25 +25,23 @@ public class Boss extends Enemy {
     }
   }
   void charge() {
-    println("raah" + shotcount);
+    //println("raah" + shotcount); // testing
     chargelen = 25; // frames
   }
   void AOE() { // skystrike
     // highlight a square around player and update in run(), do damage and display graphic after x time
   }
   void shockWave() {
-    // ideas: tiles emanating from boss update image w/ earthquake texture and deal damage if standing
-    // new kind of bullet goes square by square
-  }
-  void bulletRing() {
     int dmg = 1;
     float lifespan = 200;
     float size = 40;
     color c = color(191,214,65);
     int speed = 5;
-    for (int deg = 0; deg < 360; deg += (int) (Math.random() * 6) + 15) { // every 15-20 deg
+    for (int deg = 0; deg < 360; deg += (int) (Math.random() * 6) + 10) { // every 10-15 deg
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
     }
+  }
+  void bulletRing() {
   }
   public void drawEnemy(){
     fill(128,0,128);
@@ -60,10 +58,11 @@ public class Boss extends Enemy {
         charge();
       }
       else if (choice == 2) {
-        bulletRing(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
+        charge();
+        shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
       }
       else if (choice == 3) {
-        shockWave();
+        bulletRing();
       }
       else if (choice == 4) {
         AOE();
@@ -78,7 +77,18 @@ public class Boss extends Enemy {
         charge = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);
         charge.normalize();
       }
-      getPosition().add(PVector.mult(charge, 10));
+      PVector newPos = PVector.add(this.getPosition(), PVector.mult(charge, 10));
+      int newTileX = (int)(newPos.x/TILE_SIZE);
+      int newTileY = (int)(newPos.y/TILE_SIZE);
+      if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
+        Tile newTile = getCurrentRoom().room[newTileY][newTileX];
+        if(!newTile.getCollision()){
+          this.setPosition(newPos);
+        }else{
+          hitCollideTile = true; 
+          chargelen = 1;
+        }
+      }
       chargelen--;
     }
     drawEnemy(); 

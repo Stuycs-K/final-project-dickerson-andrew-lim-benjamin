@@ -26,7 +26,7 @@ void setup() {
 
   keyboardInput = new KeyboardBuffer();
   gameMap = initializeMap();
-  p1 = new Player(6, 8, "eggie", 50);
+  p1 = new Player(15, 8, "eggie", 50);
   entityList.add(p1);
   
   waterimg = loadImage("Images/water.jpg");
