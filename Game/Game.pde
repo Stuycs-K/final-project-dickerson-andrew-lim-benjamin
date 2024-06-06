@@ -7,7 +7,7 @@ ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
 HashMap<String, PImage> imageMap;
-PImage floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right;
+PImage sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right;
 Map gameMap;
 Player p1;
 
@@ -16,6 +16,9 @@ void setup() {
   size(1500, 1000);
   surface.setResizable(false);
   //fullScreen();
+  
+  PFont PixeloidSans = createFont("PixeloidSans.ttf", 128);
+  textFont(PixeloidSans);
       
   gameMap = initializeMap();
   p1 = new Player(15, 8, "eggie", 50);
@@ -38,7 +41,7 @@ void setup() {
       img.resize(imageSizes[i], imageSizes[i]);
       imageMap.put(imageName, img);
     }
-  
+    
     floor = imageMap.get("floor");
     water = imageMap.get("water");
     grassydirtwall = imageMap.get("grassydirtwall(3)");
@@ -55,20 +58,28 @@ void setup() {
     p1right = imageMap.get("p1right");
    
     int[][] startMenuLayout = {
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     Room startMenuRoom = new Room(startMenuLayout);
   
     startMenuRoom.drawRoom();
+    
+    sky = loadImage("Images/sky(1).png");
+    sky.resize(TILE_SIZE*15, TILE_SIZE*7);
+    image(sky, 0, 0);
+    
+    fill(251, 205, 5);
+    textAlign(CENTER, BOTTOM);
+    text("Press Start", width/2, height/2);
     
   }
 
@@ -81,6 +92,7 @@ void draw() {
   }
   
   if(mode==1){
+    //gameMap = initializeMap();
     gameMap.drawMap();
     // other idea: make currentRoom an empty room for bossArena
     //dead = 1;
@@ -91,6 +103,7 @@ void draw() {
     }
     else{ // run game loop
       spawnBoss();
+      lockDoors();
       int eList = entityList.size();
       if(eList > 1){
         for (int i = 0; i < eList; i++) {
@@ -145,15 +158,15 @@ void win() {
     // enemy/boss win
     //println("You lose");
     fill(0);
-    textSize(128);
-    text("Enemies Win!", 2*width/7-25, height/2);   
+    textAlign(CENTER, CENTER);
+    text("Enemies Win!", width/2, height/2);
   }
   if (dead == 1) {
     // player win
     //println("You win");
     fill(0);
-    textSize(128);
-    text("Player Win!", width/3-50, height/2);   
+    textAlign(CENTER, CENTER);
+    text("Player Win!", width/2, height/2);
   }
   // stop draw
 }
@@ -161,7 +174,6 @@ void win() {
 public void spawnAllEnemies(){
   for(int r = 0; r<gameMap.getRows(); r++){
     for(int c = 0; c<gameMap.getCols(); c++){
-      println("running");
       int randEnemyCount = (int)random(3)+1;
       spawnEnemy(r, c, randEnemyCount);
     }

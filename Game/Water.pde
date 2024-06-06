@@ -9,7 +9,9 @@ public class Water extends Tile {
   }
   
   public void drawTile(int xcor, int ycor){
-    super.drawTile(xcor, ycor, water);    
+    //color c = color(100,236,244);
+    //super.drawTile(xcor, ycor, c, false);
+    super.drawTile(xcor, ycor, water);
   }
 
 }

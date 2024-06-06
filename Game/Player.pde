@@ -178,9 +178,15 @@ public void reset(){
     while(entityList.size() > 0){
       entityList.remove(0);
     }
+    for (Bullet b : bulletList) {
+      b.setLifeSpan(0);
+    }
     
-    mode=0;
-    dead=-1;
+    leversPressed = 0;
+    bossSpawned = false;
+    dead = -1;
+    mode = 0;
+    mouseLeft = false;
     setup();
     
   }
