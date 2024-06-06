@@ -5,7 +5,7 @@ public class Boss extends Enemy {
   private PVector charge;
   private int AOEcd;
   private PVector AOEtarget;
-  private int AOEsize;
+  private float AOEsize;
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
@@ -14,7 +14,7 @@ public class Boss extends Enemy {
     charge = new PVector();
     AOEtarget = new PVector();
     AOEcd = 0;
-    AOEsize = 8;
+    AOEsize = p1.getRadius()*8;
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -63,6 +63,7 @@ public class Boss extends Enemy {
       nextact = (int)(Math.random() * 2) + 1; // 1 - 2 cd
       if (choice == 1) {
         charge();
+        //AOE();
       }
       else if (choice == 2) {
         charge();
@@ -70,10 +71,11 @@ public class Boss extends Enemy {
       }
       else if (choice == 3) {
         bulletRing();
+        AOE();
       }
       else if (choice == 4) {
         AOE();
-        println("AOEing");
+        //println("AOEing");
       }
       shotcount = 0;
     }
@@ -105,16 +107,42 @@ public class Boss extends Enemy {
       }
       if (AOEcd >= 46) { // 46 - 50
         fill(color(255,0,255));
-        circle(AOEtarget.x, AOEtarget.y, p1.getRadius() * AOEsize);
+        //square(AOEtarget.x-AOEsize, AOEtarget.y-AOEsize, AOEsize*2);
+        circle(AOEtarget.x, AOEtarget.y, AOEsize);
       }
       else if (AOEcd > 0 && AOEcd <=5) { // 5 - 1
         if (AOEcd == 5) { // damage
-          if (p1.getPosition().dist(AOEtarget) < p1.getRadius() * AOEsize) {
+        println("AOE");
+          // collision w square
+          //float collx = AOEtarget.x; // center of square coords
+          //float colly = AOEtarget.y;
+          //float px = p1.getX(); 
+          //float py = p1.getY();
+          //float locx = 0; // the point being tested
+          //float locy = 0; 
+          //if (px < collx) { // AOEsize = width /2 and height /2 of square
+          //  locx = collx - AOEsize; // left edge
+          //}
+          //else {
+          //  locx = collx + AOEsize; // right edge
+          //}
+          //if (py < colly) { // top edge
+          //  locy = colly - AOEsize;
+          //}
+          //else { // bottom edge
+          //  locy = colly + AOEsize;
+          //}
+          //println(pow(locx - px, 2));
+          //println(locx + " " + px);
+          //println((sqrt(pow(locx - px, 2) + pow(locy - py, 2))));
+          //if (sqrt(pow(locx - px, 2) + pow(locy - py, 2)) < p1.getRadius()) { 
+          if (p1.getPosition().dist(AOEtarget) < AOEsize - p1.getRadius()) {
+            println("hit");
             p1.setHP(p1.getHP() - 2);
           }
         }
         fill(color(255,0,0));
-        circle(AOEtarget.x, AOEtarget.y, p1.getRadius() * AOEsize);
+        circle(AOEtarget.x, AOEtarget.y, AOEsize);
       }
       AOEcd--;
     }
