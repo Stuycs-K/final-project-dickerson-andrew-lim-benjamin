@@ -13,20 +13,13 @@ void keyReleased() {
 class KeyboardBuffer {
   //make a list of actions you want to have in your program
   //As a simple example this is just two instance varibles, but a list/array would work well for large quantities.
-  boolean P1_UP;
-  boolean P1_DOWN;
-  boolean P1_LEFT;
-  boolean P1_RIGHT;
-  boolean P1_SPACE;
-  boolean P1_INTERACT;
+  boolean P1_UP, P1_DOWN, P1_LEFT, P1_RIGHT, P1_SPACE, P1_INTERACT, P1_8, P1_9, P1_0;
+  boolean[] keyList = new boolean[]{P1_UP, P1_DOWN, P1_LEFT, P1_RIGHT, P1_SPACE, P1_INTERACT, P1_8, P1_9, P1_0};
 
   public KeyboardBuffer() {
-    P1_UP = false;
-    P1_DOWN = false;
-    P1_LEFT = false;
-    P1_RIGHT = false;
-    P1_SPACE = false;
-    P1_INTERACT = false;
+    for(int i = 0; i<keyList.length; i++){
+      keyList[i] = false;
+    }
   }
 
   //Map your keys here. You can bind any key presses to
@@ -51,6 +44,15 @@ class KeyboardBuffer {
     }
     if(code == 'E'){
       P1_INTERACT = pressed;
+    }
+    if(code == '8'){
+      P1_8 = pressed;
+    }
+    if(code == '9'){
+      P1_9 = pressed;
+    }
+    if(code == '0'){
+      P1_0 = pressed;
     }
     //special codes exist: https://processing.org/reference/keyCode.html
     

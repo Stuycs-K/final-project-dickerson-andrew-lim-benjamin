@@ -146,3 +146,42 @@ public class Player extends Adventurer {
   }
  
 }
+
+public void showBossWin(){
+  if(keyboardInput.P1_8){
+    dead = 0;
+  }
+}
+
+public void showPlayerWin(){
+  if(keyboardInput.P1_9){
+    dead = 1;
+  }
+}
+
+public void reset(){
+  if(keyboardInput.P1_0){
+    
+    for(int r = 1; r<p1.getCurrentRoomHeight()-1; r++){
+      for(int c = 1; c<p1.getCurrentRoomLength()-1; c++){
+         Tile newTile = p1.getCurrentRoom().room[r][c];
+         if(newTile.isOfType("Lever")){
+           Lever l = (Lever)p1.getCurrentRoom().room[r][c];
+           l.setToggle(false);
+         }
+      }
+    }
+    
+    p1 = new Player(15, 8, "eggie (reborn)", 50);
+    entityList.add(p1);
+    
+    while(entityList.size() > 0){
+      entityList.remove(0);
+    }
+    
+    mode=0;
+    dead=-1;
+    setup();
+    
+  }
+}

@@ -6,7 +6,7 @@ public class Lever extends Tile {
   private boolean toggled;
 
   public Lever(){
-    super(true, false, false, "Lever");
+    super(false, false, true, "Lever");
     toggled = false;
   }
   
@@ -23,7 +23,7 @@ public class Lever extends Tile {
     return toggled;
   }
   
-  public void setToggled(boolean toggled){
+  public void setToggle(boolean toggled){
     this.toggled = toggled;
   }
     

@@ -74,13 +74,15 @@ public class Bullet {
   }
   
   public boolean collide() {
-    for (Adventurer e : entityList) {
-      if ((e.getCurrentRoom()).equals(p1.getCurrentRoom()) && pos.dist(e.position) < Math.abs(e.getRadius()-size) && e.getAllyStatus() != this.getAllyStatus()) {
-        //println(e);
-        e.setHP(e.hp - damage);
-        bulletList.remove(this);
-        return true;
-      }
+    if(entityList.size() > 1){
+      for(Adventurer e : entityList) {
+        if ((e.getCurrentRoom()).equals(p1.getCurrentRoom()) && pos.dist(e.position) < Math.abs(e.getRadius()-size) && e.getAllyStatus() != this.getAllyStatus()) {
+          //println(e);
+          e.setHP(e.hp - damage);
+          bulletList.remove(this);
+          return true;
+        }
+      } 
     }
     return false;
   }

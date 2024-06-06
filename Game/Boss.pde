@@ -37,7 +37,7 @@ public class Boss extends Enemy {
     float size = 40;
     color c = color(191,214,65);
     int speed = 5;
-    for (int deg = 0; deg < 360; deg += (int) (Math.random() * 6) + 10) { // every 10-15 deg
+    for (int deg = 0; deg < 360; deg += 6) { // every 6 deg
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
     }
   }
@@ -80,7 +80,7 @@ public class Boss extends Enemy {
       PVector newPos = PVector.add(this.getPosition(), PVector.mult(charge, 10));
       int newTileX = (int)(newPos.x/TILE_SIZE);
       int newTileY = (int)(newPos.y/TILE_SIZE);
-      if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
+      if(newTileX >= 0 && newTileX < p1.getCurrentRoomLength() && newTileY >= 0 && newTileY < p1.getCurrentRoomHeight()){
         Tile newTile = getCurrentRoom().room[newTileY][newTileX];
         if(!newTile.getCollision()){
           this.setPosition(newPos);
@@ -100,14 +100,19 @@ public class Boss extends Enemy {
 public void spawnBoss(){
   if(leversPressed >= 3 && !bossSpawned){
     bossSpawned = true;
-    int hp = 20;
+    int hp = 40;
     int speed = 3;
     String name = "BeezleBob";
     int radius = 75;
     entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
     
-    p1.setCurrentRoom(gameMap.getRoom(1,1));
-    p1.setPosition(width/2, (int)((height/2)*1.5));
+    //p1.setCurrentRoom(gameMap.getRoom(1,1));
+    //p1.setPosition(width/2, (int)((height/2)*1.5));
+  }
+}
+
+public void lockDoors(){
+  if(bossSpawned && p1.getCurrentRoomRow() == 1 && p1.getCurrentRoomCol() == 1){
     for(int r = 0; r<p1.getCurrentRoomHeight(); r++){
       for(int c = 0; c<p1.getCurrentRoomLength(); c++){
         Tile newTile = p1.getCurrentRoom().room[r][c];

@@ -102,6 +102,7 @@ public void spawnEnemy(int roomRow, int roomCol){
 }
 
 public void spawnEnemy(int roomRow, int roomCol, int[]eCoords){
+  println("added enemy");
   entityList.add(new Enemy(3, 3, "Bob", 50, eCoords[0], eCoords[1], roomRow, roomCol));
 }
 

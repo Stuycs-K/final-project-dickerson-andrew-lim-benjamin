@@ -9,8 +9,6 @@ public class Door extends Tile {
   }
   
   public void drawTile(int xcor, int ycor){
-    //color c = color(80, 44, 21);
-    //super.drawTile(xcor, ycor, c, false);
     super.drawTile(xcor, ycor, door);
   }
 
