@@ -41,7 +41,24 @@ public class Boss extends Enemy {
       bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
     }
   }
-  void bulletRing() {
+  void beyblade() {
+    println("doing beyblade rn");
+    int dmg = 1;
+    float lifespan = 200;
+    float size = 40;
+    //color c = color(191,214,65);
+    color c = color(255);
+    int speed = 5;
+    int moveDelay = 100;
+    while(moveDelay>0){
+      PVector walk = new PVector(width/2 - this.getPosition().x, height/2 - this.getPosition().y);
+      walk.normalize();
+      walk.mult(this.getSpeed());
+      for (int deg = 0; deg < 360; deg += random(60)+30) {
+        bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
+      }
+      moveDelay--;
+    }
   }
   public void drawEnemy(){
     fill(128,0,128);
@@ -62,7 +79,7 @@ public class Boss extends Enemy {
         shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
       }
       else if (choice == 3) {
-        bulletRing();
+        beyblade();
       }
       else if (choice == 4) {
         AOE();
