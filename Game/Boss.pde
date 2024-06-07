@@ -6,6 +6,7 @@ public class Boss extends Enemy {
   private int AOEcd;
   private PVector AOEtarget;
   private float AOEsize;
+  private boolean nextShockwave;
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
@@ -14,7 +15,8 @@ public class Boss extends Enemy {
     charge = new PVector();
     AOEtarget = new PVector();
     AOEcd = 0;
-    AOEsize = p1.getRadius()*8;
+    AOEsize = p1.getRadius()*4;
+    nextShockwave = false;
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -64,10 +66,12 @@ public class Boss extends Enemy {
       if (choice == 1) {
         charge();
         //AOE();
+        nextact = 1;
       }
       else if (choice == 2) {
+        nextShockwave = true;
         charge();
-        shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
+        //shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
       }
       else if (choice == 3) {
         bulletRing();
@@ -81,6 +85,10 @@ public class Boss extends Enemy {
     }
     if (chargelen == 0) {
       move();
+      if (nextShockwave) {
+        shockWave();
+        nextShockwave = false;
+      }
     }
     else {
       if (chargelen == 25) {
@@ -108,7 +116,7 @@ public class Boss extends Enemy {
       if (AOEcd >= 46) { // 46 - 50
         fill(color(255,0,255));
         //square(AOEtarget.x-AOEsize, AOEtarget.y-AOEsize, AOEsize*2);
-        circle(AOEtarget.x, AOEtarget.y, AOEsize);
+        circle(AOEtarget.x, AOEtarget.y, AOEsize*2);
       }
       else if (AOEcd > 0 && AOEcd <=5) { // 5 - 1
         if (AOEcd == 5) { // damage
@@ -136,13 +144,13 @@ public class Boss extends Enemy {
           //println(locx + " " + px);
           //println((sqrt(pow(locx - px, 2) + pow(locy - py, 2))));
           //if (sqrt(pow(locx - px, 2) + pow(locy - py, 2)) < p1.getRadius()) { 
-          if (p1.getPosition().dist(AOEtarget) < AOEsize - p1.getRadius()) {
+          if (p1.getPosition().dist(AOEtarget) < AOEsize + p1.getRadius()) {
             println("hit");
             p1.setHP(p1.getHP() - 2);
           }
         }
         fill(color(255,0,0));
-        circle(AOEtarget.x, AOEtarget.y, AOEsize);
+        circle(AOEtarget.x, AOEtarget.y, AOEsize*2);
       }
       AOEcd--;
     }
