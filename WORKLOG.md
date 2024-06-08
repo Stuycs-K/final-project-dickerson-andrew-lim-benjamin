@@ -125,3 +125,9 @@ Worked on bossmoves:
 Working ring of bullets except for hitboxes a bit off
 Working charge except for collision w walls
 developed ideas for shockwave and aoe
+
+### 6/6/24
+
+Worked on bossmoves: 
+Working AOE except for hitboxes a bit off
+tried to make AOE work as square but couldn't figure out circle-rectangle collision
