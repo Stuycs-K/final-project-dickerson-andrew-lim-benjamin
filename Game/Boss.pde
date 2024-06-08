@@ -3,8 +3,9 @@ public class Boss extends Enemy {
   private int shotcount;
   private int nextact;
   private PVector charge;
-  private int AOEcd;
-  private PVector AOEtarget;
+  //private int AOEcd;
+  //private PVector AOEtarget;
+  private ArrayList<AOE> AOElist;
   private float AOEsize;
   private boolean nextShockwave;
   
@@ -13,10 +14,11 @@ public class Boss extends Enemy {
     chargelen = 0;
     nextact = 3;
     charge = new PVector();
-    AOEtarget = new PVector();
-    AOEcd = 0;
+    //AOEtarget = new PVector();
+    //AOEcd = 0;
     AOEsize = p1.getRadius()*4;
     nextShockwave = false;
+    AOElist = new ArrayList<AOE>();
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
@@ -38,7 +40,8 @@ public class Boss extends Enemy {
   }
   void AOE() { // skystrike
     // highlight a square around player and update in run(), do damage and display graphic after x time
-    AOEcd = 50; // target circle from 50-45, damage display 5-0
+    //AOEcd = 50; // target circle from 50-45, damage display 5-0
+    AOElist.add(new AOE(p1.getPosition().copy(), AOEsize));
   }
   void shockWave() {
     int dmg = 1;
@@ -91,12 +94,7 @@ public class Boss extends Enemy {
         //shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
       }
       else if (choice == 3) {
-<<<<<<< HEAD
         beyblade();
-=======
-        bulletRing();
-        AOE();
->>>>>>> bossmoves
       }
       else if (choice == 4) {
         AOE();
@@ -130,50 +128,13 @@ public class Boss extends Enemy {
       }
       chargelen--;
     }
-    if (AOEcd > 0) {
-      if (AOEcd == 50) {
-        AOEtarget = p1.getPosition().copy();
+    for (int i = 0; i < AOElist.size(); i++) {
+      if (AOElist.get(i).getCD() == 0) {
+        AOElist.remove(i);
       }
-      if (AOEcd >= 46) { // 46 - 50
-        fill(color(255,0,255));
-        //square(AOEtarget.x-AOEsize, AOEtarget.y-AOEsize, AOEsize*2);
-        circle(AOEtarget.x, AOEtarget.y, AOEsize*2);
+      else {
+        AOElist.get(i).run();
       }
-      else if (AOEcd > 0 && AOEcd <=5) { // 5 - 1
-        if (AOEcd == 5) { // damage
-        println("AOE");
-          // collision w square
-          //float collx = AOEtarget.x; // center of square coords
-          //float colly = AOEtarget.y;
-          //float px = p1.getX(); 
-          //float py = p1.getY();
-          //float locx = 0; // the point being tested
-          //float locy = 0; 
-          //if (px < collx) { // AOEsize = width /2 and height /2 of square
-          //  locx = collx - AOEsize; // left edge
-          //}
-          //else {
-          //  locx = collx + AOEsize; // right edge
-          //}
-          //if (py < colly) { // top edge
-          //  locy = colly - AOEsize;
-          //}
-          //else { // bottom edge
-          //  locy = colly + AOEsize;
-          //}
-          //println(pow(locx - px, 2));
-          //println(locx + " " + px);
-          //println((sqrt(pow(locx - px, 2) + pow(locy - py, 2))));
-          //if (sqrt(pow(locx - px, 2) + pow(locy - py, 2)) < p1.getRadius()) { 
-          if (p1.getPosition().dist(AOEtarget) < AOEsize + p1.getRadius()) {
-            println("hit");
-            p1.setHP(p1.getHP() - 2);
-          }
-        }
-        fill(color(255,0,0));
-        circle(AOEtarget.x, AOEtarget.y, AOEsize*2);
-      }
-      AOEcd--;
     }
     drawEnemy(); 
     //println(chargelen);
