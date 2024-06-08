@@ -34,7 +34,6 @@ public class Player extends Adventurer {
     if (keyboardInput.P1_RIGHT) {
       walk.x = 1;
     }
-    walk.normalize();
     if (dodgeCD <= 0 && keyboardInput.P1_SPACE) {
       dodge();
     }
@@ -42,21 +41,21 @@ public class Player extends Adventurer {
       setSpeed(getSpeed()/5);
       isDodging = false;
     }
-    walk.mult(this.getSpeed());
+    applyMoveCollision(walk);
+    //walk.normalize();
+    //walk.mult(this.getSpeed());
       
-    PVector newPos = PVector.add(this.getPosition(), walk);
-    int newTileX = (int)(newPos.x/TILE_SIZE);
-    int newTileY = (int)(newPos.y/TILE_SIZE);
-    if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
-      Tile newTile = getCurrentRoom().room[newTileY][newTileX];
-      //print(newTile.getType());
-      //print("X: "+ newTileX + ", Y: " + newTileY + ", ");
-      if(newTile.isOfType("Door")){
-        this.changeRoom(newTileX, newTileY);
-      }else if(!newTile.getCollision()){
-        this.setPosition(newPos);
-      }
-    }
+    //PVector newPos = PVector.add(this.getPosition(), walk);
+    //int newTileX = (int)(newPos.x/TILE_SIZE);
+    //int newTileY = (int)(newPos.y/TILE_SIZE);
+    //if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
+    //  Tile newTile = getCurrentRoom().room[newTileY][newTileX];
+    //  if(newTile.isOfType("Door")){
+    //    this.changeRoom(newTileX, newTileY);
+    //  }else if(!newTile.getCollision()){
+    //    this.setPosition(newPos);
+    //  }
+    //}
   }
  
   void changeRoom(int newTileX, int newTileY){

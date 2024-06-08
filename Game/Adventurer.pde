@@ -9,6 +9,7 @@ public abstract class Adventurer {
   private int shootDelay;
   private int lastShotTime = 0;
   private Room currentRoom;
+  private boolean hitCollideTile;
   int currentRoomRow;
   int currentRoomCol;
   
@@ -35,6 +36,12 @@ public abstract class Adventurer {
   }
   void setCurrentRoomCol(int currentRoomCol) {
     this.currentRoomCol = currentRoomCol;
+  }
+  boolean getHitCollideTile() {
+    return hitCollideTile;
+  }
+  void setHitCollideTile(boolean hitCollideTile) {
+    this.hitCollideTile = hitCollideTile;
   }
   
   
@@ -118,5 +125,31 @@ public abstract class Adventurer {
   abstract void run(); // move, isDead check
   boolean isDead() {
     return hp <= 0;
+  }
+  
+  
+  void applyMoveCollision(float x, float y, int speed){
+    PVector walk = new PVector(x, y);
+    walk.normalize();
+    walk.mult(speed);
+    PVector newPos = PVector.add(this.getPosition(), walk);
+    int newTileX = (int)(newPos.x/TILE_SIZE);
+    int newTileY = (int)(newPos.y/TILE_SIZE);
+    if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
+      Tile newTile = getCurrentRoom().room[newTileY][newTileX];
+      if(ally && newTile.isOfType("Door")){
+        p1.changeRoom(newTileX, newTileY);
+      }else if(!newTile.getCollision()){
+        this.setPosition(newPos);
+      }else{
+        hitCollideTile = true; 
+      }
+    }  
+  }
+  void applyMoveCollision(float x, float y){
+    applyMoveCollision(x, y, this.getSpeed());
+  }
+  void applyMoveCollision(PVector walk){
+    applyMoveCollision(walk.x, walk.y);
   }
 }

@@ -2,7 +2,6 @@ public class Enemy extends Adventurer {
   int lastTimeMoved;
   int moveDelay;
   int randMoveNum;
-  boolean hitCollideTile;
   
   public Enemy(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(false, hp, speed, name, radius, 45);
@@ -12,7 +11,7 @@ public class Enemy extends Adventurer {
     this.setPosition(x, y);
     lastTimeMoved = 0;
     moveDelay = 30;
-    hitCollideTile = false;
+    setHitCollideTile(false);
   } 
   
   void shoot() {
@@ -24,7 +23,7 @@ public class Enemy extends Adventurer {
   
   void move() {
     if (frameCount - lastTimeMoved >= moveDelay) {
-      if(hitCollideTile){
+      if(getHitCollideTile()){
         //println("hit wall");
         int newRand = randMoveNum;
         while(newRand == randMoveNum){
@@ -32,7 +31,7 @@ public class Enemy extends Adventurer {
         }
         moveDelay = 0;
         randMoveNum = newRand;
-        hitCollideTile = false;
+        setHitCollideTile(false);
       }else{
         randMoveNum = (int) random(5);
         //randMoveNum = 4;
@@ -62,18 +61,7 @@ public class Enemy extends Adventurer {
       }
       walk.normalize();
       walk.mult(this.getSpeed());
-      
-      PVector newPos = PVector.add(this.getPosition(), walk);
-      int newTileX = (int)(newPos.x/TILE_SIZE);
-      int newTileY = (int)(newPos.y/TILE_SIZE);
-      if(newTileX >= 0 && newTileX < getCurrentRoom().room[0].length && newTileY >= 0 && newTileY < getCurrentRoom().room.length){
-        Tile newTile = getCurrentRoom().room[newTileY][newTileX];
-        if(!newTile.getCollision()){
-          this.setPosition(newPos);
-        }else{
-          hitCollideTile = true; 
-        }
-      }
+      applyMoveCollision(walk);
     }
   }
   

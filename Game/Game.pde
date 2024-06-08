@@ -7,7 +7,7 @@ ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
 HashMap<String, PImage> imageMap;
-PImage sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right;
+PImage sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right, arrow, bossLeft, bossRight;
 Map gameMap;
 Player p1;
 
@@ -30,9 +30,9 @@ void setup() {
     
     imageMap = new HashMap<String, PImage>();
   
-    String[] imageNames = {"floor", "water", "grassydirtwall(3)", "dirtwallupper(2)", "dirtwalllower(2)", "lever", "levertoggled", "door", "uncracked", "cracked", "p1up", "p1down", "p1left", "p1right"};
-    int playerImgSize = (int)(50 * 1.5);
-    int[] imageSizes = {TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, playerImgSize, playerImgSize, playerImgSize, playerImgSize};
+    String[] imageNames = {"floor", "water", "grassydirtwall(3)", "dirtwallupper(2)", "dirtwalllower(2)", "lever", "levertoggled", "door", "uncracked", "cracked", "p1up", "p1down", "p1left", "p1right", "bossLeft", "bossRight"};
+    int playerImgSize = (int)(p1.getRadius() * 1.5);
+    int[] imageSizes = {TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, playerImgSize, playerImgSize, playerImgSize, playerImgSize, 100, 100};
   
     for (int i = 0; i < imageNames.length; i++) {
       String imageName = imageNames[i];
@@ -56,6 +56,10 @@ void setup() {
     p1down = imageMap.get("p1down");
     p1left = imageMap.get("p1left");
     p1right = imageMap.get("p1right");
+    bossLeft = imageMap.get("bossLeft");
+    bossRight = imageMap.get("bossRight");
+    arrow = loadImage("Images/arrow.png");
+    arrow.resize(9, 45);
    
     int[][] startMenuLayout = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -72,7 +76,7 @@ void setup() {
     Room startMenuRoom = new Room(startMenuLayout);
   
     startMenuRoom.drawRoom();
-    
+        
     sky = loadImage("Images/sky(1).png");
     sky.resize(TILE_SIZE*15, TILE_SIZE*7);
     image(sky, 0, 0);
