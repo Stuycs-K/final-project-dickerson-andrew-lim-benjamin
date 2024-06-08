@@ -2,22 +2,39 @@ public class Boss extends Enemy {
   private int chargelen;
   private int shotcount;
   private int nextact;
+<<<<<<< HEAD
   private boolean isBeyblade;
   private int beybladeStartTime;
   private int beybladeDuration;
   private int shootInterval;
   private int lastShotTime;
   PVector charge;
+=======
+  private PVector charge;
+  //private int AOEcd;
+  //private PVector AOEtarget;
+  private ArrayList<AOE> AOElist;
+  private float AOEsize;
+  private boolean nextShockwave;
+>>>>>>> 31f33ce781b15d7b8223742c98d54cec90ac9cf9
   
   public Boss(int hp, int speed, String name, int radius, int x, int y, int roomRow, int roomCol) {
     super(hp, speed, name, radius, x, y, roomRow, roomCol);
     chargelen = 0;
     nextact = 3;
     charge = new PVector();
+<<<<<<< HEAD
     isBeyblade = false;
     isBeyblade = false;
     beybladeDuration = 5000;
     shootInterval = 50;
+=======
+    //AOEtarget = new PVector();
+    //AOEcd = 0;
+    AOEsize = p1.getRadius()*4;
+    nextShockwave = false;
+    AOElist = new ArrayList<AOE>();
+>>>>>>> 31f33ce781b15d7b8223742c98d54cec90ac9cf9
   }
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom)
@@ -45,6 +62,8 @@ public class Boss extends Enemy {
   
   void AOE() { // skystrike
     // highlight a square around player and update in run(), do damage and display graphic after x time
+    //AOEcd = 50; // target circle from 50-45, damage display 5-0
+    AOElist.add(new AOE(p1.getPosition().copy(), AOEsize));
   }
   
   void shockWave() {
@@ -73,6 +92,7 @@ public class Boss extends Enemy {
   }
 
   void run() {
+<<<<<<< HEAD
     if(!isBeyblade){
       shoot();
       if (shotcount >= nextact) {
@@ -81,6 +101,54 @@ public class Boss extends Enemy {
         nextact = (int)(Math.random() * 3) + 2; // 2 - 4 cd
         if (choice == 1) {
           charge();
+=======
+    shoot();
+    if (shotcount >= nextact) {
+      // random of 3 actions
+      int choice = (int)(Math.random() * 4) + 1; // 1 - 4
+      nextact = (int)(Math.random() * 2) + 1; // 1 - 2 cd
+      if (choice == 1) {
+        charge();
+        //AOE();
+        nextact = 1;
+      }
+      else if (choice == 2) {
+        nextShockwave = true;
+        charge();
+        //shockWave(); // hitboxes def buggy, fix later, maybe by inc draw radius when above some size
+      }
+      else if (choice == 3) {
+        beyblade();
+      }
+      else if (choice == 4) {
+        AOE();
+        //println("AOEing");
+      }
+      shotcount = 0;
+    }
+    if (chargelen == 0) {
+      move();
+      if (nextShockwave) {
+        shockWave();
+        nextShockwave = false;
+      }
+    }
+    else {
+      if (chargelen == 25) {
+        charge = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);
+        charge.normalize();
+      }
+      PVector newPos = PVector.add(this.getPosition(), PVector.mult(charge, 10));
+      int newTileX = (int)(newPos.x/TILE_SIZE);
+      int newTileY = (int)(newPos.y/TILE_SIZE);
+      if(newTileX >= 0 && newTileX < p1.getCurrentRoomLength() && newTileY >= 0 && newTileY < p1.getCurrentRoomHeight()){
+        Tile newTile = getCurrentRoom().room[newTileY][newTileX];
+        if(!newTile.getCollision()){
+          this.setPosition(newPos);
+        }else{
+          hitCollideTile = true; 
+          chargelen = 1;
+>>>>>>> 31f33ce781b15d7b8223742c98d54cec90ac9cf9
         }
         else if (choice == 2) {
           charge();
@@ -127,6 +195,14 @@ public class Boss extends Enemy {
         isBeyblade = false;
       }
     }
+    for (int i = 0; i < AOElist.size(); i++) {
+      if (AOElist.get(i).getCD() == 0) {
+        AOElist.remove(i);
+      }
+      else {
+        AOElist.get(i).run();
+      }
+    }
     drawEnemy(); 
     //println(chargelen); 
   }
@@ -140,7 +216,7 @@ public void spawnBoss(){
     int speed = 3;
     String name = "BeezleBob";
     int radius = 75;
-    entityList.add(new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
+    entityList.add(0,new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
     
     //p1.setCurrentRoom(gameMap.getRoom(1,1));
     //p1.setPosition(width/2, (int)((height/2)*1.5));
