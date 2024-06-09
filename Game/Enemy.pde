@@ -43,15 +43,19 @@ public class Enemy extends Adventurer {
       PVector walk = new PVector(0, 0);
       if (randMoveNum == 0) {
         walk.y = -1;
+        setMoveDir("up");
       }
       if (randMoveNum == 1) {
         walk.y = 1;
+        setMoveDir("down");
       }
       if (randMoveNum == 2) {
         walk.x = -1;
+        setMoveDir("left");
       }
       if (randMoveNum == 3) {
         walk.x = 1;
+        setMoveDir("right");
       }
       if (randMoveNum == 4) {
         walk = new PVector(p1.getX() - this.getPosition().x, p1.getY() - this.getPosition().y);

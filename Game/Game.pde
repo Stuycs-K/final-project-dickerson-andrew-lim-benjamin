@@ -7,7 +7,7 @@ ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 int TILE_SIZE = 100;
 boolean mouseLeft = false;
 HashMap<String, PImage> imageMap;
-PImage sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right, arrow, bossLeft, bossRight;
+PImage sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, grassydirtwallwithshadow, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right, arrow, bossLeft, bossRight, AOE;
 Map gameMap;
 Player p1;
 
@@ -30,9 +30,9 @@ void setup() {
     
     imageMap = new HashMap<String, PImage>();
   
-    String[] imageNames = {"floor", "water", "grassydirtwall(3)", "dirtwallupper(2)", "dirtwalllower(2)", "lever", "levertoggled", "door", "uncracked", "cracked", "p1up", "p1down", "p1left", "p1right", "bossLeft", "bossRight"};
+    String[] imageNames = {"floor", "water", "grassydirtwall(3)", "dirtwallupper(2)", "dirtwalllower(2)", "grassydirtwallwithshadow", "lever", "levertoggled", "door", "uncracked", "cracked", "p1up", "p1down", "p1left", "p1right", "AOE"};
     int playerImgSize = (int)(p1.getRadius() * 1.5);
-    int[] imageSizes = {TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, playerImgSize, playerImgSize, playerImgSize, playerImgSize, 100, 100};
+    int[] imageSizes = {TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, TILE_SIZE, playerImgSize, playerImgSize, playerImgSize, playerImgSize, 255};
   
     for (int i = 0; i < imageNames.length; i++) {
       String imageName = imageNames[i];
@@ -47,6 +47,7 @@ void setup() {
     grassydirtwall = imageMap.get("grassydirtwall(3)");
     dirtwallupper = imageMap.get("dirtwallupper(2)");
     dirtwalllower = imageMap.get("dirtwalllower(2)");
+    grassydirtwallwithshadow = imageMap.get("grassydirtwallwithshadow");
     lever = imageMap.get("lever");
     levertoggled = imageMap.get("levertoggled");
     door = imageMap.get("door");
@@ -56,8 +57,11 @@ void setup() {
     p1down = imageMap.get("p1down");
     p1left = imageMap.get("p1left");
     p1right = imageMap.get("p1right");
-    bossLeft = imageMap.get("bossLeft");
-    bossRight = imageMap.get("bossRight");
+    AOE = imageMap.get("AOE");
+    bossLeft = loadImage("Images/bossLeft.png");
+    bossRight = loadImage("Images/bossRight.png");
+    bossLeft.resize(120, 100);
+    bossRight.resize(120, 100);
     arrow = loadImage("Images/arrow.png");
     arrow.resize(9, 45);
    
@@ -77,7 +81,7 @@ void setup() {
   
     startMenuRoom.drawRoom();
         
-    sky = loadImage("Images/sky(1).png");
+    sky = loadImage("Images/sky(2).png");
     sky.resize(TILE_SIZE*15, TILE_SIZE*7);
     image(sky, 0, 0);
     

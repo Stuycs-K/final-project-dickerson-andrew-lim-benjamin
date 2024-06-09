@@ -20,8 +20,12 @@ public class Wall extends Tile {
         image(dirtwalllower, xcor, ycor);//replace with brick wall ltr
       }
     }else{
-      if (xcor >= 0 && xcor < width && ycor < TILE_SIZE) {
-        image(grassydirtwall, xcor, ycor); 
+      if (ycor < TILE_SIZE) {
+        if(xcor >= TILE_SIZE && xcor <= width-TILE_SIZE){
+          image(grassydirtwallwithshadow, xcor, ycor);
+        }else{
+          image(grassydirtwall, xcor, ycor);
+        }
       }else if (ycor < height-TILE_SIZE){
         image(dirtwallupper, xcor, ycor);//replace with brick wall ltr
       }else {

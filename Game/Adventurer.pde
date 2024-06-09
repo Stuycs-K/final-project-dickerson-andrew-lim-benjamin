@@ -10,6 +10,7 @@ public abstract class Adventurer {
   private int lastShotTime = 0;
   private Room currentRoom;
   private boolean hitCollideTile;
+  private String moveDir;
   int currentRoomRow;
   int currentRoomCol;
   
@@ -42,6 +43,12 @@ public abstract class Adventurer {
   }
   void setHitCollideTile(boolean hitCollideTile) {
     this.hitCollideTile = hitCollideTile;
+  }
+  String getMoveDir() {
+    return moveDir;
+  }
+  void setMoveDir(String moveDir) {
+    this.moveDir = moveDir;
   }
   
   
