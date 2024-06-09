@@ -85,12 +85,10 @@ public class Boss extends Enemy {
   public void drawEnemy(){
     //fill(128,0,128);
     //circle(this.getX(), this.getY(), getRadius());
-    int imgHeight = 100;
-    int imgWidth = 120;
     if(getMoveDir().equals("left")){
-      image(bossLeft, getX()-imgWidth/2, getY()-imgHeight/2);
+      image(bossLeft, getX()-bossLeft.width/2, getY()-bossLeft.height/2);
     }else{
-      image(bossRight, getX()-imgWidth/2, getY()-imgHeight/2);
+      image(bossRight, getX()-bossRight.width/2, getY()-bossRight.height/2);
     }
   }
 
@@ -110,7 +108,7 @@ public class Boss extends Enemy {
           charge();
           shockWave();
         }
-        else if (choice == 3) {
+        else if (choice == 3  && prevchoice != 3) {
           beyblade();
         }
         else if (choice == 4) {
@@ -139,7 +137,9 @@ public class Boss extends Enemy {
       applyMoveCollision(walk);
     }else{
       float randAngle = random(TWO_PI);
+      println("randAngle: "+randAngle);
       PVector randomBulletdir = PVector.fromAngle(randAngle);
+      println("ranBulldir  x: "+randomBulletdir.x+" y: "+randomBulletdir.y);
       if(millis() - beybladeStartTime < beybladeDuration) {
         if (millis() - lastShotTime > shootInterval) {
           int dmg = 2;

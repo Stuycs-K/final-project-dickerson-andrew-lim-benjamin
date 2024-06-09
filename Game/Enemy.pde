@@ -12,6 +12,7 @@ public class Enemy extends Adventurer {
     lastTimeMoved = 0;
     moveDelay = 30;
     setHitCollideTile(false);
+    setMoveDir("up");
   } 
   
   void shoot() {
@@ -70,8 +71,17 @@ public class Enemy extends Adventurer {
   }
   
   public void drawEnemy(){
-    fill(245, 64, 118);
-    circle(this.getX(), this.getY(), getRadius());
+    //fill(245, 64, 118);
+    //circle(this.getX(), this.getY(), getRadius());
+    if(getMoveDir().equals("up")){
+      image(slimeup, getX()-slimeup.width/2, getY()-slimeup.height/2);
+    }else if(getMoveDir().equals("down")){
+      image(slimedown, getX()-slimedown.width/2, getY()-slimedown.height/2);
+    }else if(getMoveDir().equals("left")){
+      image(slimeleft, getX()-slimeleft.width/2, getY()-slimeleft.height/2);
+    }else if(getMoveDir().equals("right")){
+      image(slimeright, getX()-slimeright.width/2, getY()-slimeright.height/2);
+    }
   }
   
   void run() {
@@ -104,8 +114,10 @@ public int[] randomEnemyCoords(){
     randX = (int)random(width/TILE_SIZE - 2)+1;
     randY = (int)random(height/TILE_SIZE - 2)+1; 
   }
+  println("randX: "+randX+" randY: "+randY);
   randX = (int)((randX+0.5)*TILE_SIZE);
   randY = (int)((randY+0.5)*TILE_SIZE); 
+  println("randX: "+randX+" randY: "+randY);
   return(new int[]{randX, randY});
 }
 

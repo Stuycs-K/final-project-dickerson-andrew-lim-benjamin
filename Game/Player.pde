@@ -124,8 +124,7 @@ public class Player extends Adventurer {
     if (keyboardInput.P1_RIGHT) {
       playerImg = p1right;
     }
-    float imgSize = getRadius()*1.5;
-    image(playerImg, getX()-imgSize/2, getY()-imgSize/2);
+    image(playerImg, getX()-playerImg.width/2, getY()-playerImg.height/2);
   }
   
   public void drawHealthBar(){

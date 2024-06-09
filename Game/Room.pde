@@ -21,27 +21,15 @@ public class Room {
           case 1:
             room[r][c] = new Wall();
             break;
-          //case 2:
-          //  room[r][c] = new Wall();
-          //  break;
           case 3:
             room[r][c] = new Cracked();
             break;
           case 4:
             room[r][c] = new Water();
             break;
-          //case 5:
-          //  room[r][c] = new Wall();
-          //  break;
-          //case 6:
-          //  room[r][c] = new Wall();
-          //  break;
           case 7:
             room[r][c] = new Lever();
             break;
-          //case 8:
-          //  room[r][c] = new Wall();
-          //  break;
           case 9:
             room[r][c] = new Door();
             break;
