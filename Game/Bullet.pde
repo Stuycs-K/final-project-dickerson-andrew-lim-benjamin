@@ -10,12 +10,16 @@ public class Bullet {
   private PVector pos;
   private PVector velocity;
   private boolean ally;
-  //private PImage img;
+  private boolean hasImg;
+  private PImage img;
 
   public Bullet(float startX, float startY, float endX, float endY, boolean ally, Room currentRoom){ // must call with location
-    this(1, 100, 20, color(252,26,82), startX, startY, endX, endY, 8, ally, currentRoom);
+    this(1, 100, 20, color(252,26,82), startX, startY, endX, endY, 8, ally, currentRoom, false, null);
   }
-  public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom){ // should only construct on mouse click
+  public Bullet(float startX, float startY, float endX, float endY, boolean ally, Room currentRoom, PImage img){ // must call with location
+    this(1, 100, 20, color(252,26,82), startX, startY, endX, endY, 8, ally, currentRoom, true, img);
+  }
+  public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom, boolean hasImg, PImage img){ // should only construct on mouse click
     this.damage = damage;
     this.lifespan = lifespan;
     this.size = size;
@@ -25,6 +29,10 @@ public class Bullet {
     this.speed = speed;
     this.ally = ally;
     this.currentRoom = currentRoom;
+    this.hasImg = hasImg;
+    if(hasImg){
+      this.img = img;
+    }
     
     pos = new PVector(startX, startY);
     
@@ -38,10 +46,8 @@ public class Bullet {
   }
   
   public void drawBullet(float xcor, float ycor, float endX, float endY){
-    if(ally){
-      image(arrow, xcor, ycor);
-      //translate(width/2, height/2);
-      //rotate(atan2(endY, endX)); 
+    if(hasImg){
+      image(img, xcor, ycor);
     }else{
       drawBullet(xcor, ycor);
     }

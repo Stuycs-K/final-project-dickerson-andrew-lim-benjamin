@@ -17,7 +17,7 @@ public class Enemy extends Adventurer {
   
   void shoot() {
     if (frameCount - getLastShotTime() >= getShootDelay()) {
-      bulletList.add(new Bullet(getX(), getY(), p1.getX(), p1.getY(), getAllyStatus(), getCurrentRoom()));
+      bulletList.add(new Bullet(getX(), getY(), p1.getX(), p1.getY(), getAllyStatus(), getCurrentRoom(), slimebullet));
       setLastShotTime(frameCount);
     }
   }

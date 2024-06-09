@@ -8,9 +8,10 @@ public class Player extends Adventurer {
     }
   }
 
+//Bullet(float startX, float startY, float endX, float endY, boolean ally, Room currentRoom, PImage img)
   void shoot() {
     if (getHP()>0){
-      bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom()));
+      bulletList.add(new Bullet(getX(), getY(), mouseX-getX(), mouseY-getY(), this.getAllyStatus(), this.getCurrentRoom(), arrow));
     }
   }
   void dodge() {
@@ -128,19 +129,37 @@ public class Player extends Adventurer {
   }
   
   public void drawHealthBar(){
-    color c = color(255);
-    if(getHP() > (int)getMaxHP()*2/3){
-      c = color(35,190,64);
-    }else if(getHP() <= (int)getMaxHP()*2/3 && getHP() > (int)getMaxHP()/3){
-      c = color(255,209,70);
-    }else{
-      c = color(237,24,49); 
+    //color c = color(255);
+    //if(getHP() > (int)getMaxHP()*2/3){
+    //  c = color(35,190,64);
+    //}else if(getHP() <= (int)getMaxHP()*2/3 && getHP() > (int)getMaxHP()/3){
+    //  c = color(255,209,70);
+    //}else{
+    //  c = color(237,24,49); 
+    //}
+    //fill(c);
+    //float v1X = TILE_SIZE/2;
+    //float v1Y = p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5;
+    //float vShift = 10;
+    //quad(v1X, v1Y, v1X+300, v1Y, v1X+300-vShift, v1Y-20, v1X-vShift, v1Y-20);
+    //image(healthbaroutline, TILE_SIZE/2, p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE);
+    PImage hpBar = healthbar0;
+    if(getHP() >= (int)getMaxHP()*1/6){
+      hpBar = healthbar1;
+    }if(getHP() >= (int)getMaxHP()*2/6){
+      hpBar = healthbar2;
+    }if(getHP() >= (int)getMaxHP()*3/6){
+      hpBar = healthbar3;
+    }if(getHP() >= (int)getMaxHP()*4/6){
+      hpBar = healthbar4;
+    }if(getHP() >= (int)getMaxHP()*4/6){
+      hpBar = healthbar4;
+    }if(getHP() >= (int)getMaxHP()*5/6){
+      hpBar = healthbar5;
+    }if(getHP() >= (int)getMaxHP()){
+      hpBar = healthbar6;
     }
-    fill(c);
-    float v1X = TILE_SIZE/2;
-    float v1Y = p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE/1.5;
-    float vShift = 10;
-    quad(v1X, v1Y, v1X+300, v1Y, v1X+300-vShift, v1Y-20, v1X-vShift, v1Y-20);
+    image(hpBar, TILE_SIZE/2, p1.getCurrentRoomHeight()*TILE_SIZE-TILE_SIZE);
   }
  
 }
@@ -170,7 +189,7 @@ public void reset(){
       }
     }
     
-    p1 = new Player(15, 8, "eggie (reborn)", 50);
+    p1 = new Player(12, 8, "eggie (reborn)", 50);
     entityList.add(p1);
     
     while(entityList.size() > 0){

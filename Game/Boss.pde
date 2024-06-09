@@ -34,7 +34,7 @@ public class Boss extends Enemy {
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom)
   void shoot(PVector dir, int dmg, float lifespan, float size, int speed, color c) {
-    bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), dir.x, dir.y, speed, getAllyStatus(), getCurrentRoom()));
+    bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), dir.x, dir.y, speed, getAllyStatus(), getCurrentRoom(), true, slimebullet));
     setLastShotTime(frameCount);
     shotcount++;
   }
@@ -69,7 +69,7 @@ public class Boss extends Enemy {
     color c = color(255);
     int speed = 5;
     for (int deg = 0; deg < 360; deg += 3) { // every 6 deg
-      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom()));
+      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom(), false, null));
     }
   }
   
@@ -137,9 +137,9 @@ public class Boss extends Enemy {
       applyMoveCollision(walk);
     }else{
       float randAngle = random(TWO_PI);
-      println("randAngle: "+randAngle);
-      PVector randomBulletdir = PVector.fromAngle(randAngle);
-      println("ranBulldir  x: "+randomBulletdir.x+" y: "+randomBulletdir.y);
+      println("randAngle in degrees: "+(180*randAngle)/PI);
+      PVector randBuldir = PVector.fromAngle(randAngle);
+      println("randBuldir  x: "+randBuldir.x+" y: "+randBuldir.y);
       if(millis() - beybladeStartTime < beybladeDuration) {
         if (millis() - lastShotTime > shootInterval) {
           int dmg = 2;
@@ -147,7 +147,7 @@ public class Boss extends Enemy {
           float size = 30;
           int speed = 5;
           color c = color(252,26,82);
-          shoot(randomBulletdir, dmg, lifespan, size, speed, c);
+          bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), randBuldir.x, randBuldir.y, speed, getAllyStatus(), getCurrentRoom(), false, null));
           lastShotTime = millis();
         }
       }else{
