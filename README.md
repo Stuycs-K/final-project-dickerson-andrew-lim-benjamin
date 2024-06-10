@@ -43,5 +43,5 @@ Keybinds (Testing Purposes):
  - 0: Restart (new game)
 
 ## Link
-https://drive.google.com/file/d/1VnkQIqNz01vMlzVe-iLIx3Abr4XfJw8m/view?usp=sharing
+https://drive.google.com/file/d/1VnkQIqNz01vMlzVe-iLIx3Abr4XfJw8m/view?usp=sharing\
 we have no major bugs to report.
