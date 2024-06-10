@@ -131,3 +131,8 @@ developed ideas for shockwave and aoe
 Worked on bossmoves: 
 Working AOE except for hitboxes a bit off
 tried to make AOE work as square but couldn't figure out circle-rectangle collision
+
+### 6/9/24
+
+Updated README.md
+Bug fixed beyblade direction code

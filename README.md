@@ -9,7 +9,7 @@ Andrew Dickerson, Benjamin Lim\
 ## Overview
 
 This game is a top-down action-based shooter that revolves around the premise of fighting various enemies in a grid of dungeons.\
-Three levers are dispersed throughout the dungeon. Toggling all three levers will spawn the boss. Beating the boss wins the player the game. Dying to an enemy loses the game.\
+Three levers are dispersed throughout the dungeon. Toggling all three levers will spawn the boss. Beating the boss wins the player the game. Dying to an enemy loses the game.
 Enemies have random movement in the four cardinal directions, alongside a chance to stand still for a moment, or to directly chase the player.\
 
 There are multiple types of tiles the player will encounter that can make a room more tricky to navigate.
@@ -35,3 +35,7 @@ Keybinds (Testing Purposes):
  - 8: Kill the player (shows loss screen)
  - 9: Summons and immediantly kills boss (shows win screen)
  - 0: Restart (new game)
+
+## Link
+https://drive.google.com/file/d/1VnkQIqNz01vMlzVe-iLIx3Abr4XfJw8m/view?usp=sharing
+we have no major bugs to report.
