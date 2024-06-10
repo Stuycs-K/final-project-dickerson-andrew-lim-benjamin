@@ -10,7 +10,13 @@ Andrew Dickerson, Benjamin Lim\
 
 This game is a top-down action-based shooter that revolves around the premise of fighting various enemies in a grid of dungeons.\
 Three levers are dispersed throughout the dungeon. Toggling all three levers will spawn the boss. Beating the boss wins the player the game. Dying to an enemy loses the game.\
-Enemies have random movement in the four cardinal directions, alongside a chance to stand still for a moment, or to directly chase the player.\
+
+Enemies: Slimey foes that move randomly in the four cardinal directions, with a chance to stand still for a moment or to directly chase the player; Continuously shoots bullets at the players location.
+Boss: Similiar random movement AI as the enemies but has some different attacks:
+ - (Charge) charges towards player a short distance; likely to unleash a shockwave attack shortly after.
+ - (Shockwave) fires a ring of bullets that usually must be dodged through.
+ - (Skystrike) creates a targeting circle around the player before creating a large area of effect attack.
+ - (Death Blossom) the boss moves near the center of the screen before shooting a barrage of bullets in random directions.
 
 There are multiple types of tiles the player will encounter that can make a room more tricky to navigate.
  - Wall: Basic tiles that surround the border of the screen as dirt/grass textures and in the middle of the room as brick wall texturees; prevent the player from moving through; cannot be shot through; cannot be broken
