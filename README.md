@@ -44,4 +44,4 @@ Keybinds (Testing Purposes):
 
 ## Link
 https://drive.google.com/file/d/1VnkQIqNz01vMlzVe-iLIx3Abr4XfJw8m/view?usp=sharing \
-we have no major bugs to report.
+We have no major bugs to report, but it may be necessary to rename arrow.png and bow.png lowercase.
