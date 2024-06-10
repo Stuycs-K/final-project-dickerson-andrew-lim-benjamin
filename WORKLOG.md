@@ -96,11 +96,12 @@
 
 ### 6/9/24
 
+ - Changed pictures for boss attacks, menu screen, enemies, enemy bullets, and hp bar
+ - Updated room setup
  - Removed starting levers for final demo
- - Changed pictures for boss attacks and menu screen.
- - Updated hp bar and bullet sprites
- - Added sprites for enemies and updated room setup
- - Updated start menu image
+ - Resolved issue where enemies could occasionally spawn in walls
+ - Added rotation to specific bullets
+ - Added bow to player model
 
 ## Benjamin Lim
 
