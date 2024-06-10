@@ -112,7 +112,7 @@ public class Player extends Adventurer {
   }
 
   public void drawPlayer(){
-    PImage playerImg = p1up;
+    PImage playerImg = p1down;
     if (keyboardInput.P1_UP) {
       playerImg = p1up;
     }
@@ -126,6 +126,16 @@ public class Player extends Adventurer {
       playerImg = p1right;
     }
     image(playerImg, getX()-playerImg.width/2, getY()-playerImg.height/2);
+    
+    float angle = atan2(mouseY-getY(), mouseX-getX())-PI/2;
+    float bowDistance = -10;
+    float bowX = getX() + cos(angle) * bowDistance;
+    //float bowY = getY() + sin(angle) * bowDistance;
+    pushMatrix();
+    translate(bowX, getY());
+    rotate(angle);
+    image(bow, -bow.width / 2, -bow.height / 2);
+    popMatrix();
   }
   
   public void drawHealthBar(){

@@ -93,13 +93,13 @@ public class Enemy extends Adventurer {
 
 public void spawnEnemy(int roomRow, int roomCol, int count){
   for(int i = 0; i<count; i++){
-    int[] eCoords = randomEnemyCoords();
+    int[] eCoords = randomEnemyCoords(roomRow, roomCol);
     spawnEnemy(roomRow, roomCol, eCoords); 
   }
 }
 
 public void spawnEnemy(int roomRow, int roomCol){
-  int[] eCoords = randomEnemyCoords();
+  int[] eCoords = randomEnemyCoords(roomRow, roomCol);
   spawnEnemy(roomRow, roomCol, eCoords);
 }
 
@@ -107,20 +107,20 @@ public void spawnEnemy(int roomRow, int roomCol, int[]eCoords){
   entityList.add(new Enemy(3, 3, "Bob", 50, eCoords[0], eCoords[1], roomRow, roomCol));
 }
 
-public int[] randomEnemyCoords(){
+public int[] randomEnemyCoords(int row, int col){
   int randX = 0;
   int randY = 0; 
-  while(!isValidTileSpawn(randX, randY)){
+  while(!isValidTileSpawn(randX, randY, row, col)){
     randX = (int)random(width/TILE_SIZE - 2)+1;
     randY = (int)random(height/TILE_SIZE - 2)+1; 
   }
-  println("randX: "+randX+" randY: "+randY);
+  //println("randX: "+randX+" randY: "+randY);
   randX = (int)((randX+0.5)*TILE_SIZE);
-  randY = (int)((randY+0.5)*TILE_SIZE); 
-  println("randX: "+randX+" randY: "+randY);
+  randY = (int)((randY+0.5)*TILE_SIZE);
+  //println("randX: "+randX+" randY: "+randY);
   return(new int[]{randX, randY});
 }
 
-public boolean isValidTileSpawn(int x, int y){
-  return !(p1.getCurrentRoom().room[y][x]).getCollision();
+public boolean isValidTileSpawn(int x, int y, int row, int col){
+  return !(gameMap.getRoom(row, col).room[y][x]).getCollision();
 }
