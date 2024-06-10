@@ -8,7 +8,7 @@ int TILE_SIZE = 100;
 boolean mouseLeft = false;
 HashMap<String, PImage> squareImageMap;
 HashMap<String, PImage> spriteImageMap;
-PImage healthbaroutline, healthbar6, healthbar5, healthbar4, healthbar3, healthbar2, healthbar1, healthbar0, sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, grassydirtwallwithshadow, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right, arrow, slimedown, slimeleft, slimeright, slimeup, bossLeft, bossRight, AOE, slimebullet;
+PImage shockwave, bossBullet1, bossBullet2, healthbaroutline, healthbar6, healthbar5, healthbar4, healthbar3, healthbar2, healthbar1, healthbar0, sky, floor, water, grassydirtwall, dirtwallupper, dirtwalllower, grassydirtwallwithshadow, lever, levertoggled, door, uncracked, cracked, p1up, p1down, p1left, p1right, bow, arrow, slimedown, slimeleft, slimeright, slimeup, bossLeft, bossRight, AOE, slimebullet;
 Map gameMap;
 Player p1;
 
@@ -54,8 +54,8 @@ void setup() {
     slimebullet = squareImageMap.get("slimebullet");
     
     spriteImageMap = new HashMap<String, PImage>();
-    String[] spriteImageNames = {"p1up", "p1down", "p1left", "p1right", "arrow", "slimeup", "slimedown", "slimeleft", "slimeright", "bossLeft", "bossRight", "healthbaroutline", "healthbar6", "healthbar5", "healthbar4", "healthbar3", "healthbar2", "healthbar1", "healthbar0"};
-    int[] spriteImageSizes = {72, 72, 72, 72, 72, 72, 72, 72, 9, 45, 22*2, 18*2, 22*2, 18*2, 22*2, 18*2, 22*2, 18*2, 120, 100, 120, 100, 185, 100, 160, 100, 165, 100, 160, 100, 160, 100, 160, 100, 160, 100, 160, 100};
+    String[] spriteImageNames = {"p1up", "p1down", "p1left", "p1right", "bow", "arrow", "slimeup", "slimedown", "slimeleft", "slimeright", "bossLeft(1)", "bossRight(1)", "bossBullet1", "bossBullet2", "shockwave", "healthbaroutline", "healthbar6", "healthbar5", "healthbar4", "healthbar3", "healthbar2", "healthbar1", "healthbar0"};
+    int[] spriteImageSizes = {24*3, 24*3, 24*3, 24*3, 24*3, 24*3, 24*3, 24*3, 24*3, 20*3, 9, 45, 22*2, 18*2, 22*2, 18*2, 22*2, 18*2, 22*2, 18*2, 59*2, 39*2, 59*2, 39*2, 9*2, 15*2, 9*3, 16*3, 40, 40, 185, 100, 160, 100, 165, 100, 160, 100, 160, 100, 160, 100, 160, 100, 160, 100};
     for (int i = 0; i < spriteImageNames.length; i++) {
       String imageName = spriteImageNames[i];
       String imagePath = "Images/" + imageName + ".png";
@@ -71,8 +71,12 @@ void setup() {
     slimedown = spriteImageMap.get("slimedown");
     slimeleft = spriteImageMap.get("slimeleft");
     slimeright = spriteImageMap.get("slimeright");
-    bossLeft = spriteImageMap.get("bossLeft");
-    bossRight = spriteImageMap.get("bossRight");
+    bossLeft = spriteImageMap.get("bossLeft(1)");
+    bossRight = spriteImageMap.get("bossRight(1)");
+    bossBullet1 = spriteImageMap.get("bossBullet1");
+    bossBullet2 = spriteImageMap.get("bossBullet2");
+    shockwave = spriteImageMap.get("shockwave");
+    bow = spriteImageMap.get("bow");
     arrow = spriteImageMap.get("arrow");
     healthbaroutline = spriteImageMap.get("healthbaroutline");
     healthbar6 = spriteImageMap.get("healthbar6");
@@ -92,7 +96,7 @@ void setup() {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
@@ -100,8 +104,8 @@ void setup() {
   
     startMenuRoom.drawRoom();
         
-    sky = loadImage("Images/sky(2).png");
-    sky.resize(TILE_SIZE*15, TILE_SIZE*7);
+    sky = loadImage("Images/sky(9).jpg");
+    sky.resize(TILE_SIZE*15, TILE_SIZE*8);
     image(sky, 0, 0);
     
     fill(251, 205, 5);

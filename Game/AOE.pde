@@ -19,9 +19,9 @@ public class AOE {
     }
     else if (cd <=5) { // 5 - 1
       if (cd == 5) { // damage
-        println("AOE");
+        //println("AOE");
         if (p1.getPosition().dist(target) < radius + p1.getRadius()) {
-          println("hit");
+          //println("hit");
           p1.setHP(p1.getHP() - 1);
         }
       }

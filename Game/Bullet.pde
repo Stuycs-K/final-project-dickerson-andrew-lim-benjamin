@@ -40,14 +40,24 @@ public class Bullet {
       velocity = (PVector.fromAngle(atan2(endY, endX))).mult(speed); // unit vector
     }else{
       velocity = new PVector(endX - startX, endY - startY);
+      this.endX = endX - startX;
+      this.endY = endY - startY;
       velocity.normalize();
       velocity.mult(speed); 
     }
   }
   
   public void drawBullet(float xcor, float ycor, float endX, float endY){
-    if(hasImg){
+    if(hasImg && img.equals(shockwave)){
       image(img, xcor, ycor);
+    }
+    else if(hasImg){
+      float angle = atan2(endY, endX)-PI/2;
+      pushMatrix();
+      translate(xcor, ycor);
+      rotate(angle);
+      image(img, -img.width / 2, -img.height / 2);
+      popMatrix();
     }else{
       drawBullet(xcor, ycor);
     }

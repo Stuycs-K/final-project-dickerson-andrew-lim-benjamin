@@ -12,7 +12,7 @@ public class Wall extends Tile {
     //color c = color(204,76,58);
     //super.drawTile(xcor, ycor, c, false);
     if(mode==0){
-      if (xcor >= 0 && xcor < width && ycor < TILE_SIZE*8) {
+      if (xcor >= 0 && xcor < width && ycor < TILE_SIZE*9) {
         image(grassydirtwall, xcor, ycor); 
       }else if (ycor < height-TILE_SIZE){
         image(dirtwallupper, xcor, ycor);//replace with brick wall ltr
@@ -21,7 +21,7 @@ public class Wall extends Tile {
       }
     }else{
       if (ycor < TILE_SIZE) {
-        if(xcor >= TILE_SIZE && xcor <= width-TILE_SIZE){
+        if(xcor >= TILE_SIZE && xcor < width-TILE_SIZE){
           image(grassydirtwallwithshadow, xcor, ycor);
         }else{
           image(grassydirtwall, xcor, ycor);

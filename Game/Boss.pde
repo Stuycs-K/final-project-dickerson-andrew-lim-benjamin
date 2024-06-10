@@ -34,7 +34,7 @@ public class Boss extends Enemy {
 
   //public Bullet(int damage, float lifespan, float size, color c, float startX, float startY, float endX, float endY, int speed, boolean ally, Room currentRoom)
   void shoot(PVector dir, int dmg, float lifespan, float size, int speed, color c) {
-    bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), dir.x, dir.y, speed, getAllyStatus(), getCurrentRoom(), true, slimebullet));
+    bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), dir.x, dir.y, speed, getAllyStatus(), getCurrentRoom(), true, bossBullet1));
     setLastShotTime(frameCount);
     shotcount++;
   }
@@ -69,7 +69,7 @@ public class Boss extends Enemy {
     color c = color(255);
     int speed = 5;
     for (int deg = 0; deg < 360; deg += 3) { // every 6 deg
-      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom(), false, null));
+      bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX() + cos(deg), getY() + sin(deg), speed, getAllyStatus(), getCurrentRoom(), true, shockwave));
     }
   }
   
@@ -136,18 +136,16 @@ public class Boss extends Enemy {
       walk.mult(this.getSpeed());
       applyMoveCollision(walk);
     }else{
-      float randAngle = random(TWO_PI);
-      println("randAngle in degrees: "+(180*randAngle)/PI);
-      PVector randBuldir = PVector.fromAngle(randAngle);
-      println("randBuldir  x: "+randBuldir.x+" y: "+randBuldir.y);
       if(millis() - beybladeStartTime < beybladeDuration) {
         if (millis() - lastShotTime > shootInterval) {
           int dmg = 2;
           float lifespan = 500;
           float size = 30;
           int speed = 5;
-          color c = color(252,26,82);
-          bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), randBuldir.x, randBuldir.y, speed, getAllyStatus(), getCurrentRoom(), false, null));
+          color c = color(252, 26, 82);
+          float randAngle = random(TWO_PI);
+          PVector randBuldir = PVector.fromAngle(randAngle);
+          bulletList.add(new Bullet(dmg, lifespan, size, c, getX(), getY(), getX()-randBuldir.x, getY()-randBuldir.y, speed, getAllyStatus(), getCurrentRoom(), true, bossBullet2));
           lastShotTime = millis();
         }
       }else{
@@ -171,11 +169,11 @@ public class Boss extends Enemy {
 public void spawnBoss(){
   if(leversPressed >= 3 && !bossSpawned){
     bossSpawned = true;
-    int hp = 40;
-    int speed = 3;
+    int hp = 80;
+    int speed = 4;
     String name = "BeezleBob";
     int radius = 75;
-    entityList.add(0,new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
+    entityList.add(0, new Boss(hp, speed, name, radius, width/2, height/2, 1, 1));
     
     //p1.setCurrentRoom(gameMap.getRoom(1,1));
     //p1.setPosition(width/2, (int)((height/2)*1.5));
