@@ -71,11 +71,36 @@
 - Fixed issue of game slowing due to image resizing
 - Added more tile images
 
-
 ### 6/4/24
 
 - Added images for all tile draw methods
 
+
+### 6/5/24
+
+- Worked on project description in README.md
+
+### 6/6/24
+
+- Added start menu and shortcuts for demonstrating win/lose/reset
+
+### 6/7/24
+
+ - Began development for beyblade boss attack
+
+### 6/8/24
+
+ - Added sprite for aoe and boss
+ - Added beyblade to boss (currently only shoots in one direction towards top left for some reason)
+ - Changes to code consistency with movement collision
+
+### 6/9/24
+
+ - Removed starting levers for final demo
+ - Changed pictures for boss attacks and menu screen.
+ - Updated hp bar and bullet sprites
+ - Added sprites for enemies and updated room setup
+ - Updated start menu image
 
 ## Benjamin Lim
 
